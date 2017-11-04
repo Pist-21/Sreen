@@ -202,7 +202,7 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# SQL Server  files
+# SQL Server files
 *.mdf
 *.ldf
 
