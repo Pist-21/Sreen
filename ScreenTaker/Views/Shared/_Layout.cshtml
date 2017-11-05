@@ -7,6 +7,7 @@
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body style="background-color: #E0E0E0">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,10 +30,9 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <footer class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #000000">
-            <div class="container">
-                <div class="navbar-header navbar-brand"><font color="#929292">Developed by </font><font color="#3D8AF7">DREAM</font><font color="#929292">TEAM</font></div>
-            </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year – ScreenTaker</p>
         </footer>
     </div>
 
