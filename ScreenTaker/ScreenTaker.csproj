@@ -1,12 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<<<<<<< HEAD
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" />
-=======
   <Import Project="..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
->>>>>>> hotfix
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,13 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-<<<<<<< HEAD
-=======
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
->>>>>>> hotfix
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -70,12 +62,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-<<<<<<< HEAD
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-=======
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -83,15 +69,12 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
->>>>>>> hotfix
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-<<<<<<< HEAD
-=======
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -116,7 +99,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
->>>>>>> hotfix
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -134,39 +116,9 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-<<<<<<< HEAD
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-=======
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
->>>>>>> hotfix
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -185,12 +137,6 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-=======
->>>>>>> hotfix
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -231,25 +177,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-<<<<<<< HEAD
-    <Compile Include="folder.cs">
-=======
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Folder.cs">
->>>>>>> hotfix
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="groupShare.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="image.cs">
-=======
     <Compile Include="GroupMember.cs">
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
@@ -257,18 +193,10 @@
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Image.cs">
->>>>>>> hotfix
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-<<<<<<< HEAD
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="person.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="personGroup.cs">
-=======
     <Compile Include="Models\ImageCompressor.cs" />
     <Compile Include="Models\LocalizationInside.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -277,7 +205,6 @@
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonGroup.cs">
->>>>>>> hotfix
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,17 +224,10 @@
       <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-<<<<<<< HEAD
-    <Compile Include="tag.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="userShare.cs">
-=======
     <Compile Include="Tag.cs">
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
     <Compile Include="UserShare.cs">
->>>>>>> hotfix
       <DependentUpon>ScreenTakerDM.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -320,37 +240,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\private.png" />
     <Content Include="fonts\public.png" />
-<<<<<<< HEAD
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="img\1.png" />
-    <Content Include="img\10.png" />
-    <Content Include="img\2.png" />
-    <Content Include="img\3.png" />
-    <Content Include="img\4.png" />
-    <Content Include="img\5.png" />
-    <Content Include="img\6.png" />
-    <Content Include="img\7.png" />
-    <Content Include="img\8.png" />
-    <Content Include="img\9.png" />
-    <Content Include="img\printscreen.png" />
-    <Content Include="img\private.png" />
-    <Content Include="img\public.png" />
-    <Content Include="img\SimpleTower.png" />
-    <Content Include="img\user.png" />
-    <Content Include="ScreenTakerDM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
-      <LastGenOutput>ScreenTakerDM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ScreenTakerDM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
-      <LastGenOutput>ScreenTakerDM.cs</LastGenOutput>
-    </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-=======
     <Content Include="For Database\SQLQuery_CreateDB.sql" />
     <Content Include="For Database\SQLQuery_CreateUSER.sql" />
     <Content Include="For Database\SQLQuery_DropAllTables.sql" />
@@ -366,7 +255,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="For Database\screenTakerDB.erwin" />
->>>>>>> hotfix
     <EntityDeploy Include="ScreenTakerDM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ScreenTakerDM.Designer.cs</LastGenOutput>
@@ -374,21 +262,12 @@
     <Content Include="ScreenTakerDM.edmx.diagram">
       <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
     </Content>
-<<<<<<< HEAD
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-=======
->>>>>>> hotfix
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
-<<<<<<< HEAD
-=======
     <Content Include="ScreenTakerDM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
@@ -408,7 +287,6 @@
     <Content Include="Scripts\collapse.js" />
     <Content Include="Scripts\constraint.js" />
     <Content Include="Scripts\dropdown.js" />
->>>>>>> hotfix
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -416,23 +294,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-<<<<<<< HEAD
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-=======
     <Content Include="Scripts\markAttachment.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\popover.js" />
->>>>>>> hotfix
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-<<<<<<< HEAD
-=======
     <Content Include="Scripts\scrollspy.js" />
     <Content Include="Scripts\shift.js" />
     <Content Include="Scripts\tab.js" />
@@ -440,7 +311,6 @@
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\utils.js" />
->>>>>>> hotfix
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -480,6 +350,7 @@
     <Content Include="Views\Home\Library.cshtml" />
     <Content Include="Views\Home\Images.cshtml" />
     <Content Include="Views\Home\SingleImage.cshtml" />
+    <Content Include="Views\Home\SharedImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -523,13 +394,8 @@
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-<<<<<<< HEAD
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-=======
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props'))" />
->>>>>>> hotfix
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

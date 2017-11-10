@@ -2,17 +2,6 @@
     ViewBag.Title = "SingleImage";
 }
 
-<<<<<<< HEAD
-<div class="col-md-12 text-left">
-    <h2><a href="/Home/Images">User</a>->@ViewBag.CurrentImageTitle</h2>
-</div>
-
-<div class="row text-center">
-    <img src="@ViewBag.CurrentImagePath"/>
-    <label class="text-center" style="padding-left: 10px">@ViewBag.CurrentImageTitle</label>
-</div>
-
-=======
 
 <div class="container-fluid">
     <div class="col-md-12 text-left" style="margin-top:20px;">
@@ -83,11 +72,10 @@
                     </div>
                     <hr />
                     <p style="color: #E0E0E0">Share image</p>
-                    <input class="form-control" style="width: 100%" type="text" placeholder="Sharing link" value="@ViewBag.OriginalPath"> @*value="@Url.Content(ViewBag.OriginalName)"*@
+                    <input class="form-control" style="width: 100%" type="text" placeholder="Sharing link" value="@ViewBag.SharedLink"> @*value="@Url.Content(ViewBag.OriginalName)"*@
                     <hr />
                 </div>
             </div>
         </div>
     </div>
 </div>
->>>>>>> hotfix
