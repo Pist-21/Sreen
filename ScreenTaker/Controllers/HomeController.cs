@@ -1,15 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ScreenTaker.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ScreenTaker.Controllers
 {
     public class HomeController : Controller
     {
+        private ScreenTakerDBEntities _entities = new ScreenTakerDBEntities();
+        private ImageCompressor _imageCompressor = new ImageCompressor();
+        private RandomStringGenerator _stringGenerator = new RandomStringGenerator()
+        {
+            Chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
+            Length = 10
+        };
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                using (var transaction = _entities.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var sharedCode = _stringGenerator.Next();
+                        var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        var image = new Image();
+                        image.isPublic = false;
+                        image.folderId = _entities.Folder.Where(f=>f.name.Equals("General")).Select(fol=>fol.id).FirstOrDefault();
+                        image.sharedCode = sharedCode;
+                        image.name = fileName;
+                        image.publicationDate = DateTime.Now;
+                        _entities.Image.Add(image);
+                        _entities.SaveChanges();
+                        var bitmap = new Bitmap(file.InputStream);
+
+                        var path = Path.Combine(Server.MapPath("~/img/"), sharedCode + ".png");
+                        bitmap.Save(path, ImageFormat.Png);
+
+                        var compressedBitmap = _imageCompressor.Compress(bitmap, new Size(128, 128));
+                        path = Path.Combine(Server.MapPath("~/img/"), sharedCode + "_compressed.png");
+                        compressedBitmap.Save(path, ImageFormat.Png);
+                        transaction.Commit();
+                    }
+                    catch(Exception e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                 
+            }
             return View();
         }
 
@@ -27,78 +77,67 @@ namespace ScreenTaker.Controllers
             return View();
         }
 
-#region Library
+        #region Library
         public ActionResult Library()
         {
             ViewBag.Message = "Library page";
-
-            ViewBag.Folders = folders;
-
+            ViewBag.Folders = _entities.Folder.ToList();
+            ViewBag.FolderLink = GetBaseUrl() + _entities.Folder.ToList().ElementAt(0).sharedCode;
             return View();
         }
-
-        // todo: database context
-        public struct Folder
-        {
-            public int BookId { get; set; }
-            public string Title { get; set; }
-            public bool IsPrivate { get; set; }
-
-            public Folder(int bookId, string title, bool isPrivate)
-            {
-                BookId = bookId;
-                Title = title;
-                IsPrivate = isPrivate;
-            }
-        }
-        // represent db context
-        List<Folder> folders = new List<Folder>()
-            {
-                new Folder(0, "My Photo", false),
-                new Folder(1, "Fishing", true),
-                new Folder(2, "Job", false),
-                new Folder(3, "Friends", false),
-                new Folder(4, "Kids", true),
-                new Folder(5, "Summer-2015", false),
-                new Folder(6, "Africa", true),
-                new Folder(7, "Encapsulation", true)
-            };
 
         [HttpGet]
         public ActionResult ChangeFoldersAttr(Folder folder)
         {
-            // modify dbc
-            folders[folder.BookId] = folder;
+            ViewBag.Folders = _entities.Folder.ToList();
 
             return RedirectToAction("Library");
         }
         #endregion
 
-        List<string> list = new List<string>
-            {
-                "image0",
-                "image1",
-                "image2",
-                "image3",
-                "image4",
-                "image5",
-                "image6",
-                "image7",
-                "image8",
-                "image9"
-            };
-
         public ActionResult Images()
         {
+            var list = _entities.Image.ToList();
             ViewBag.Images = list;
-
+            var pathsList = _entities.Image.ToList().Select(i => GetBaseUrl() + "img/" + i.sharedCode ).ToList();
+            ViewBag.Paths = pathsList;
+            ViewBag.BASE_URL = GetBaseUrl() + "img/";
             return View();
         }
 
-        [HttpGet]
-        public ActionResult SingleImage(int id)
+        public string GetBaseUrl()
         {
-            ViewBag.Image = list[id];
+            var request = HttpContext.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+            return baseUrl;
+           // return "http://screentaker.azurewebsites.net/";
+        }
+
+        [HttpGet]
+        public ActionResult SingleImage(string image)
+        {
+            ViewBag.Image =  _entities.Image.Where(im=>im.sharedCode.Equals(image)).FirstOrDefault();
+            if(ViewBag.Image==null && _entities.Image.ToList().Count>0)
+            {
+                ViewBag.Image = _entities.Image.ToList().First();
+            }
+            ViewBag.OriginalPath = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.OriginalPath = GetBaseUrl()+"img/"+ViewBag.Image.sharedCode + ".png";
+            }
+            ViewBag.OriginalName = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.OriginalName = ViewBag.Image.name + ".png";
+            }
+
+            ViewBag.Date = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.Date = ViewBag.Image.publicationDate;
+            }
             return View();
         }
     }
