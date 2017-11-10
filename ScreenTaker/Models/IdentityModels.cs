@@ -22,11 +22,19 @@ namespace ScreenTaker.Models
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
+<<<<<<< HEAD
         {
         }
 
         public static ApplicationDbContext Create()
         {
+=======
+        { }
+        
+        public static ApplicationDbContext Create()
+        {
+           
+>>>>>>> hotfix
             return new ApplicationDbContext();
         }
     }

@@ -12,6 +12,7 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
+<<<<<<< HEAD
     public partial class person
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -38,5 +39,37 @@ namespace ScreenTaker
         public virtual ICollection<userShare> userShare { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tag> tag { get; set; }
+=======
+    public partial class Person
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Person()
+        {
+            this.Folder = new HashSet<Folder>();
+            this.GroupMember = new HashSet<GroupMember>();
+            this.PersonGroup = new HashSet<PersonGroup>();
+            this.UserShare = new HashSet<UserShare>();
+            this.Tag = new HashSet<Tag>();
+        }
+    
+        public string email { get; set; }
+        public string personImageName { get; set; }
+        public bool isActive { get; set; }
+        public byte[] passwordHash { get; set; }
+        public string salt { get; set; }
+        public Nullable<System.DateTime> registartionDate { get; set; }
+        public int id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Folder> Folder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroupMember> GroupMember { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PersonGroup> PersonGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserShare> UserShare { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tag> Tag { get; set; }
+>>>>>>> hotfix
     }
 }

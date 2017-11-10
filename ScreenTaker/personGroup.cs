@@ -12,6 +12,7 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
+<<<<<<< HEAD
     public partial class personGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,5 +28,25 @@ namespace ScreenTaker
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<groupShare> groupShare { get; set; }
         public virtual person person { get; set; }
+=======
+    public partial class PersonGroup
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PersonGroup()
+        {
+            this.GroupMember = new HashSet<GroupMember>();
+            this.GroupShare = new HashSet<GroupShare>();
+        }
+    
+        public string name { get; set; }
+        public Nullable<int> personId { get; set; }
+        public int id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroupMember> GroupMember { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroupShare> GroupShare { get; set; }
+        public virtual Person Person { get; set; }
+>>>>>>> hotfix
     }
 }

@@ -242,4 +242,10 @@ ModelManifest.xml
 .paket/paket.exe
 
 # FAKE - F# Make
+<<<<<<< HEAD
 .fake/
+=======
+.fake/
+/ScreenTaker/Models/ImageCompressor.cs
+/ScreenTaker/Models/RandomStringGenerator.cs
+>>>>>>> hotfix

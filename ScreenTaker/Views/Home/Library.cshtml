@@ -6,15 +6,25 @@
     <div class="col-md-9">
         @for (int i = 0; i < ViewBag.Folders.Count; i++)
         {
+<<<<<<< HEAD
             <figure class="col-md-3 library-folder text-center">
                 <img src="~/fonts/private.png" />
                 <figcaption class="text-center">@ViewBag.Folders[i].Title</figcaption>
             </figure>
+=======
+            <a href="/Home/Images">
+                <figure class="col-md-3 text-center">
+                    <img src="~/fonts/private.png" />
+                    <figcaption class="text-center">@ViewBag.Folders[i].name</figcaption>
+                </figure>
+            </a>
+>>>>>>> hotfix
         }
     </div>
     <div class="col-md-3" style="background-color: #686868; height: 90vh">
         <div style="margin-left: 10px">
             <img src="~/fonts/private.png" />
+<<<<<<< HEAD
             <p>Folder`s name</p>
             <hr/>
             <div>
@@ -28,6 +38,29 @@
             <p>Share folder</p>
             <input class="form-control" type="text" placeholder="Sharing link"/>
             <hr/>
+=======
+            <p style="color: #E0E0E0">@ViewBag.Folders[0].name</p>
+            <hr />
+            <div>
+                <button type="button" class="btn btn-default" style="width: 100%">Open</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" class="btn btn-default" style="width: 100%">Rename</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" class="btn btn-danger" style="width: 100%">Delete</button>
+            </div>
+            <br />
+            <div>
+                <button class="btn btn-warning" style="width: 100%">Make public</button>
+            </div>
+            <hr />
+            <p style="color: #E0E0E0">Share folder</p>
+            <input class="form-control" style="width: 100%" type="text" placeholder="Sharing link" value="@ViewBag.FolderLink"/>
+            <hr />
+>>>>>>> hotfix
         </div>
     </div>
 </div>

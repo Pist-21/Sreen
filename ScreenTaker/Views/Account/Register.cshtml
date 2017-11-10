@@ -3,6 +3,7 @@
     ViewBag.Title = "Register";
 }
 
+<<<<<<< HEAD
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -35,6 +36,43 @@
         </div>
     </div>
 }
+=======
+<h2>@ViewBag.Title</h2>
+<div class="col-md-4 account-style shadow">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "col-md-12 text-center form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account to keep track of your pasted images</h4>
+        <hr/>
+        @Html.ValidationSummary("", new {@class = "text-left text-primary", @style = "padding: 0"})
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-lg", @placeholder = "Email", @style = "border-radius: 0" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.PasswordFor(m => m.Password, new {@class = "input-lg", @placeholder = "Password", @style = "border-radius: 0"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-lg", @placeholder = "Confirm password", @style = "border-radius: 0" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-block btn-lg btn-default account-button" value="Register"/>
+            </div>
+        </div>
+    }
+    <div class="text-center">
+        <h4>
+            @Html.ActionLink("Already have an account?", "Login", "Account", new { @class = "account-link" })
+        </h4>
+    </div>
+</div>
+>>>>>>> hotfix
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

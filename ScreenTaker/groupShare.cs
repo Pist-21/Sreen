@@ -12,6 +12,7 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
+<<<<<<< HEAD
     public partial class groupShare
     {
         public int id { get; set; }
@@ -22,5 +23,17 @@ namespace ScreenTaker
         public virtual folder folder { get; set; }
         public virtual personGroup personGroup { get; set; }
         public virtual image image { get; set; }
+=======
+    public partial class GroupShare
+    {
+        public int groupId { get; set; }
+        public Nullable<int> folderId { get; set; }
+        public Nullable<int> imageId { get; set; }
+        public int id { get; set; }
+    
+        public virtual Folder Folder { get; set; }
+        public virtual PersonGroup PersonGroup { get; set; }
+        public virtual Image Image { get; set; }
+>>>>>>> hotfix
     }
 }
