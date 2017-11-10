@@ -4,12 +4,21 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ScreenTaker.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ScreenTaker.Controllers
 {
     public class HomeController : Controller
     {
-        public ScreenTakerDBEntities connection = new ScreenTakerDBEntities();
+        private ScreenTakerDBEntities _entities = new ScreenTakerDBEntities();
+        private ImageCompressor _imageCompressor = new ImageCompressor();
+        private RandomStringGenerator _stringGenerator = new RandomStringGenerator()
+        {
+            Chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
+            Length = 10
+        };
         public ActionResult Index()
         {
             return View();
@@ -20,9 +29,36 @@ namespace ScreenTaker.Controllers
         {
             if (file != null)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/img/"), fileName);
-                file.SaveAs(path);
+                using (var transaction = _entities.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var sharedCode = _stringGenerator.Next();
+                        var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        var image = new Image();
+                        image.isPublic = false;
+                        image.folderId = _entities.Folder.Where(f=>f.name.Equals("General")).Select(fol=>fol.id).FirstOrDefault();
+                        image.sharedCode = sharedCode;
+                        image.name = fileName;
+                        image.publicationDate = DateTime.Now;
+                        _entities.Image.Add(image);
+                        _entities.SaveChanges();
+                        var bitmap = new Bitmap(file.InputStream);
+
+                        var path = Path.Combine(Server.MapPath("~/img/"), sharedCode + ".png");
+                        bitmap.Save(path, ImageFormat.Png);
+
+                        var compressedBitmap = _imageCompressor.Compress(bitmap, new Size(128, 128));
+                        path = Path.Combine(Server.MapPath("~/img/"), sharedCode + "_compressed.png");
+                        compressedBitmap.Save(path, ImageFormat.Png);
+                        transaction.Commit();
+                    }
+                    catch(Exception e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                 
             }
             return View();
         }
@@ -41,37 +77,31 @@ namespace ScreenTaker.Controllers
             return View();
         }
 
-#region Library
+        #region Library
         public ActionResult Library()
         {
             ViewBag.Message = "Library page";
-
-            ViewBag.Folders = connection.folder.ToList();
-
+            ViewBag.Folders = _entities.Folder.ToList();
+            ViewBag.FolderLink = GetBaseUrl() + _entities.Folder.ToList().ElementAt(0).sharedCode;
             return View();
         }
-       
+
         [HttpGet]
-        public ActionResult ChangeFoldersAttr(folder folder)
+        public ActionResult ChangeFoldersAttr(Folder folder)
         {
+            ViewBag.Folders = _entities.Folder.ToList();
+
             return RedirectToAction("Library");
         }
         #endregion
 
         public ActionResult Images()
         {
-            var list = connection.image.ToList().Select(i=>i.name).ToList();
+            var list = _entities.Image.ToList();
             ViewBag.Images = list;
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult SingleImage(int id)
-        {
-            string path = GetBaseUrl() + "img/" + connection.image.ToList().ElementAt(id).name;
-            ViewBag.CurrentImagePath = path;
-            ViewBag.CurrentImageTitle = connection.image.ToList().ElementAt(id).name;
+            var pathsList = _entities.Image.ToList().Select(i => GetBaseUrl() + "img/" + i.sharedCode ).ToList();
+            ViewBag.Paths = pathsList;
+            ViewBag.BASE_URL = GetBaseUrl() + "img/";
             return View();
         }
 
@@ -81,6 +111,34 @@ namespace ScreenTaker.Controllers
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
             var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
             return baseUrl;
+           // return "http://screentaker.azurewebsites.net/";
+        }
+
+        [HttpGet]
+        public ActionResult SingleImage(string image)
+        {
+            ViewBag.Image =  _entities.Image.Where(im=>im.sharedCode.Equals(image)).FirstOrDefault();
+            if(ViewBag.Image==null && _entities.Image.ToList().Count>0)
+            {
+                ViewBag.Image = _entities.Image.ToList().First();
+            }
+            ViewBag.OriginalPath = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.OriginalPath = GetBaseUrl()+"img/"+ViewBag.Image.sharedCode + ".png";
+            }
+            ViewBag.OriginalName = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.OriginalName = ViewBag.Image.name + ".png";
+            }
+
+            ViewBag.Date = "";
+            if (ViewBag.Image != null)
+            {
+                ViewBag.Date = ViewBag.Image.publicationDate;
+            }
+            return View();
         }
     }
 }
