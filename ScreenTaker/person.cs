@@ -12,34 +12,6 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
-<<<<<<< HEAD
-    public partial class person
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public person()
-        {
-            this.folder = new HashSet<folder>();
-            this.personGroup = new HashSet<personGroup>();
-            this.userShare = new HashSet<userShare>();
-            this.tag = new HashSet<tag>();
-        }
-    
-        public int id { get; set; }
-        public string email { get; set; }
-        public string imagePath { get; set; }
-        public bool isActive { get; set; }
-        public byte[] passwordHash { get; set; }
-        public string salt { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<folder> folder { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personGroup> personGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userShare> userShare { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tag> tag { get; set; }
-=======
     public partial class Person
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -70,6 +42,5 @@ namespace ScreenTaker
         public virtual ICollection<UserShare> UserShare { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tag { get; set; }
->>>>>>> hotfix
     }
 }

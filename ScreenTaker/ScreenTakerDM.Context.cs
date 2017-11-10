@@ -25,15 +25,6 @@ namespace ScreenTaker
             throw new UnintentionalCodeFirstException();
         }
     
-<<<<<<< HEAD
-        public virtual DbSet<folder> folder { get; set; }
-        public virtual DbSet<groupShare> groupShare { get; set; }
-        public virtual DbSet<image> image { get; set; }
-        public virtual DbSet<person> person { get; set; }
-        public virtual DbSet<personGroup> personGroup { get; set; }
-        public virtual DbSet<tag> tag { get; set; }
-        public virtual DbSet<userShare> userShare { get; set; }
-=======
         public virtual DbSet<Folder> Folder { get; set; }
         public virtual DbSet<GroupMember> GroupMember { get; set; }
         public virtual DbSet<GroupShare> GroupShare { get; set; }
@@ -43,6 +34,5 @@ namespace ScreenTaker
         public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<UserShare> UserShare { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
->>>>>>> hotfix
     }
 }

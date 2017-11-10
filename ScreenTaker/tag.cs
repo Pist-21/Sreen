@@ -12,23 +12,6 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
-<<<<<<< HEAD
-    public partial class tag
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tag()
-        {
-            this.image = new HashSet<image>();
-        }
-    
-        public int id { get; set; }
-        public string name { get; set; }
-        public Nullable<int> personId { get; set; }
-    
-        public virtual person person { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<image> image { get; set; }
-=======
     public partial class Tag
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -44,6 +27,5 @@ namespace ScreenTaker
         public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Image { get; set; }
->>>>>>> hotfix
     }
 }
