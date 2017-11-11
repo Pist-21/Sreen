@@ -16,15 +16,11 @@
     white-space: normal;
 }
 
-<<<<<<< HEAD
- Set width on the form input elements since they're 100% wide by default 
-=======
 /* Set width on the form input elements since they're 100% wide by default */
->>>>>>> master
 input,
 select,
 textarea {
-    width: 100%;
+    max-width: 280px;
 }
 
 .library-menu {
@@ -138,39 +134,4 @@ textarea {
 
 }
 
-<<<<<<< HEAD
-.shadow {
-    box-shadow: 5px 5px 0 #000000;
-}
-
-.account-style {
-    background-color: #444444;
-    padding: 5px;
-    color: #D6D6D6;
-}
-
-.account-button {
-    background-color: #D6D6D6;
-    border-radius: 0;
-}
-
-.account-button:hover {
-    background-color: #EBEBEB;
-}
-
-.account-link {
-    color: #D6D6D6;
-}
-
-.account-link:hover {
-    color: #AAAAAA;
-}
-
-.login-signup-center{
-}
-
-
-
-=======
->>>>>>> master
 	
