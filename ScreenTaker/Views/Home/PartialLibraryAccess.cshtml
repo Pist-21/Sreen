@@ -1,0 +1,162 @@
+﻿@{ 
+    if (!Request.QueryString["lang"].IsEmpty())
+    {
+        Culture = UICulture = Request.QueryString["lang"];
+    }
+    else
+    {
+        Culture = UICulture = ViewBag.Localize ?? "en";
+    }
+}
+<div class="modal-header">
+    <button type="button" class="close btn-not-rounded" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="gridSystemModalLabel">@Resources.Resource.MANAGE_ACCESS</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" id="sharedLink" style="height: 30px;" onclick="selectText();" class="form-control" value="@ViewBag.FolderLink" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <h5 style="vertical-align:middle;margin:0;margin-top:5px;">@Resources.Resource.PEOPLE</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-group" style="height:auto;height:150px;overflow:auto;border:solid #E0E0E0 1px;">
+                        @if (ViewBag.AllowedUsers != null)
+                        {
+                            for (int i = 0; i < ViewBag.AllowedUsers.Count; i++)
+                            {
+                                <div class="list-group-item">
+                                    <div class="media-left" style="vertical-align: middle;" onclick=
+                                         "$('#loadingAnimation').css('visibility', 'visible');
+                                         $.ajax({
+                                        url: 'FolderAccessRemoveUser',
+                                        data: {
+                                            email: '@ViewBag.AllowedUsers[i]',
+                                            folderId: document.getElementById('Idhidden').value,
+                                        },
+                                        success: function (data) {
+                                            $('#accessDynamic').html(data);                                                  
+                                         if(document.getElementById('MessageContentFromPartial').value!='')
+                                                {
+                                                    $('#Message').modal('show');
+                                                    document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                    document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                                                }
+                                        }
+                                        });">                                   
+                                        <button type="button" class="btn badge right" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-remove glyphicon-th-large" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="media-body" style="vertical-align: middle">
+                                        <h5 class="media-heading">@ViewBag.AllowedUsers[i]</h5>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <input type="email" id="userMail" class="form-control" placeholder="@Resources.Resource.EMAIL" aria-describedby="sizing-addon2" data-autocomplete-source="@Url.Action("AutocompleteSearchEmails", "Edit")"
+                        onkeyup="CheckEmail(this)" onblur="CheckEmail(this)" onfocus="CheckEmail(this)" onchange="CheckEmail(this)" onmouseover="CheckEmail(this)">
+
+                        <span class="input-group-addon btn btn-default" aria-label="Left Align" id="sizing-addon2" onmouseover="CheckEmail($('#userMail'))"
+                              onclick=
+                              "$('#loadingAnimation').css('visibility', 'visible');
+                                    $.ajax({
+                                        url: 'FolderAccessAddUser',
+                                        data: {
+                                            email: document.getElementById('userMail').value,
+                                            folderId: document.getElementById('Idhidden').value,
+                                        },
+                                        success: function (data) {
+                                            $('#accessDynamic').html(data);
+                                            if (document.getElementById('MessageContentFromPartial').value != '') {
+                                                $('#Message').modal('show');
+                                                document.getElementById('MessageContent').innerHTML = document.getElementById('MessageContentFromPartial').value;
+                                                document.getElementById('MessageTitle').innerHTML = '@Resources.Resource.ERR_TITLE';
+                                            }
+                                        }
+                                    });">+</span>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <h5 style="vertical-align:middle;margin:0;margin-top:5px;">@Resources.Resource.GROUPS</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-group" style="height:auto;height:205px;overflow:auto;border:solid #E0E0E0 1px;">
+                        @if (ViewBag.AllGroups != null)
+                        {
+                            for (int i = 0; i < ViewBag.AllGroups.Count; i++)
+                            {
+                                <div class="list-group-item ">
+                                    <div class="material-switch media-left" style="vertical-align: middle">                                     
+                                            @if (ViewBag.GroupsAccess[i])
+                                            { 
+                                                <input id="foldersAccessSwitch @i" type="checkbox" checked/>
+                                            }
+                                            else
+                                            {
+                                                <input id="foldersAccessSwitch @i" type="checkbox"  />
+                                            }
+                                            <label for="foldersAccessSwitch @i" class="label-info" onclick=
+                                                   "$('#loadingAnimation').css('visibility', 'visible');
+                                                   $.ajax({
+                                                url: 'FolderAccessSwitchGroupsAccess',
+                                                data: {
+                                                    groupId: @ViewBag.GroupsIDs[i],
+                                                    folderId: document.getElementById('Idhidden').value,
+                                                },
+                                                success: function (data) {
+                                                    $('#accessDynamic').html(data);
+                                                        if(document.getElementById('MessageContentFromPartial').value!='')
+                                                    {
+                                                        $('#Message').modal('show');
+                                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                                                    }
+                                                }
+                                            });"/>                                       
+                                    </div>
+                                    <div class="media-body" style="vertical-align: middle">
+                                        <h5 class="media-heading">@ViewBag.AllGroups[i]</h5>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left btn-not-rounded" style="width:100px;" data-dismiss="modal">@Resources.Resource.CLOSE</button>
+</div>*@
+<script src="~/Scripts/Site.js"></script>
+@if (ViewBag.MessageContent != null)
+{
+    <input type="hidden" id="MessageContentFromPartial" value="@ViewBag.MessageContent" />
+}
+else
+{
+    <input type="hidden" id="MessageContentFromPartial" value="" />
+}

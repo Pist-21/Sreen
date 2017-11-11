@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ScreenTaker</RootNamespace>
     <AssemblyName>ScreenTaker</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,11 +62,28 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
@@ -73,8 +91,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -99,9 +116,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -119,6 +134,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -169,6 +185,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="App_GlobalResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+>>>>>>> hotfix
     <Compile Include="App_GlobalResources\Resource.uk.designer.cs">
       <DependentUpon>Resource.uk.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -184,50 +208,76 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="App_GlobalResources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+=======
+>>>>>>> hotfix
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\EditController.cs" />
+=======
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\GeneralController.cs" />
+>>>>>>> hotfix
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="database_firewall_rules.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Folder.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GroupMember.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
+    <Compile Include="Migrations\201605271430553_TestMigration.cs" />
+    <Compile Include="Migrations\201605271430553_TestMigration.Designer.cs">
+      <DependentUpon>201605271430553_TestMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="GroupShare.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
+    <Compile Include="Migrations\201605271605440_TestInit.cs" />
+    <Compile Include="Migrations\201605271605440_TestInit.Designer.cs">
+      <DependentUpon>201605271605440_TestInit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Image.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Folder.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroupMember.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroupShare.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ImageCompressor.cs" />
-    <Compile Include="Models\LocalizationInside.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\RandomStringGenerator.cs" />
-    <Compile Include="Person.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PersonGroup.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
+    <Compile Include="Models\PersonFriend.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.en.designer.cs">
       <DependentUpon>Resource.en.resx</DependentUpon>
@@ -235,39 +285,103 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ScreenTakerDM.Context.cs">
+=======
+    <Compile Include="Models\PersonGroup.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RandomStringGenerator.cs" />
+    <Compile Include="Models\ScreenTakerDataModel.Context.cs">
+>>>>>>> hotfix
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenTakerDM.Context.tt</DependentUpon>
+      <DependentUpon>ScreenTakerDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScreenTakerDM.cs">
+    <Compile Include="Models\ScreenTakerDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ScreenTakerDM.Designer.cs">
+    <Compile Include="Models\ScreenTakerDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
+      <DependentUpon>ScreenTakerDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SecurityHelper.cs" />
+    <Compile Include="Models\ServerFolder.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserShare.cs">
+      <DependentUpon>ScreenTakerDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Tag.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserShare.cs">
-      <DependentUpon>ScreenTakerDM.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Content\bootstrap-switch\bootstrap2\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-switch\bootstrap2\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap-switch\bootstrap3\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-switch\bootstrap3\bootstrap-switch.min.css" />
+=======
+    <Content Include="avatars\1LiJTYdAm2VAKNZ_128.png" />
+    <Content Include="avatars\1LiJTYdAm2VAKNZ_50.png" />
+    <Content Include="avatars\GFTKP3u0LpSEW01_128.png" />
+    <Content Include="avatars\GFTKP3u0LpSEW01_50.png" />
+    <Content Include="avatars\qhWuzhOHbl9v18w_128.png" />
+    <Content Include="avatars\qhWuzhOHbl9v18w_50.png" />
+    <Content Include="avatars\sUZjQ7mnndxDo28_128.png" />
+    <Content Include="avatars\sUZjQ7mnndxDo28_50.png" />
+    <Content Include="avatars\TEhGzEVel9PLBRW_128.png" />
+    <Content Include="avatars\TEhGzEVel9PLBRW_50.png" />
+    <Content Include="avatars\user_128.png" />
+    <Content Include="avatars\user_50.png" />
+    <Content Include="avatars\uve8edsJFyZgcLZ_128.png" />
+    <Content Include="avatars\uve8edsJFyZgcLZ_50.png" />
+    <Content Include="Content\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap-switch.min.css" />
+>>>>>>> hotfix
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Emails\Confirmation.html" />
+    <Content Include="Emails\FolderSharing.html" />
+    <Content Include="Emails\ImageSharing.html" />
+    <Content Include="Emails\ResetPassword.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+<<<<<<< HEAD
+=======
+    <Content Include="For Database\dbo.AspNetRoles.sql" />
+    <Content Include="For Database\dbo.AspNetUserClaims.sql" />
+    <Content Include="For Database\dbo.AspNetUserLogins.sql" />
+    <Content Include="For Database\dbo.AspNetUserRoles.sql" />
+    <Content Include="For Database\dbo.AspNetUsers.sql" />
+    <Content Include="For Database\dbo._MigrationHistory.sql" />
+>>>>>>> hotfix
     <Content Include="For Database\SQLQuery_CreateDB.sql" />
     <Content Include="For Database\SQLQuery_CreateUSER.sql" />
     <Content Include="For Database\SQLQuery_DropAllTables.sql" />
@@ -278,6 +392,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="For Database\screenTakerDB.erwin" />
+<<<<<<< HEAD
     <EntityDeploy Include="ScreenTakerDM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ScreenTakerDM.Designer.cs</LastGenOutput>
@@ -290,22 +405,166 @@
     <Content Include="ScreenTakerDM.edmx.diagram">
       <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
     </Content>
+=======
+    <Content Include="img\0GTCqPmButZieos.png" />
+    <Content Include="img\0GTCqPmButZieos_compressed.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\2zD2DUldWIblr8C.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\2zD2DUldWIblr8C_compressed.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\bSuKYOCrV4Rkyfd.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\bSuKYOCrV4Rkyfd_compressed.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\Fmu2kyQq9gGofHz.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\Fmu2kyQq9gGofHz_compressed.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\X5Rhd09SGylcKiH.png" />
+    <Content Include="img\2n7bU1DVQmy7aMm\X5Rhd09SGylcKiH_compressed.png" />
+    <Content Include="img\2Vzo03TA2LK1tmf.png" />
+    <Content Include="img\2Vzo03TA2LK1tmf_compressed.png" />
+    <Content Include="img\3htMpERvubvmArU.png" />
+    <Content Include="img\3W57pbt9MGjwFMZ.png" />
+    <Content Include="img\3W57pbt9MGjwFMZ_compressed.png" />
+    <Content Include="img\4JGTd6l7mYJ4re0.png" />
+    <Content Include="img\4JGTd6l7mYJ4re0_compressed.png" />
+    <Content Include="img\5bsGr4akRRAsAA6.png" />
+    <Content Include="img\5bsGr4akRRAsAA6_compressed.png" />
+    <Content Include="img\6E2zQDm1WxtckHv.png" />
+    <Content Include="img\6E2zQDm1WxtckHv_compressed.png" />
+    <Content Include="img\6NAC187uTZVjLt5.png" />
+    <Content Include="img\6NAC187uTZVjLt5_compressed.png" />
+    <Content Include="img\8668mvgPAdFM1Yj.png" />
+    <Content Include="img\amnt07rVTYK9yJA.png" />
+    <Content Include="img\amnt07rVTYK9yJA_compressed.png" />
+    <Content Include="img\bxv9G8IiCDFt2mR.png" />
+    <Content Include="img\bxv9G8IiCDFt2mR_compressed.png" />
+    <Content Include="img\BZCKK4r0p2Ahdf5.png" />
+    <Content Include="img\BZCKK4r0p2Ahdf5_compressed.png" />
+    <Content Include="img\D7rDY5Afq5pBjwl.png" />
+    <Content Include="img\DhHx5xhHRQtnIPG.png" />
+    <Content Include="img\DhHx5xhHRQtnIPG_compressed.png" />
+    <Content Include="img\ES75KXyqMx22wR3\lbbrZXdShL0GpqZ.png" />
+    <Content Include="img\ES75KXyqMx22wR3\lbbrZXdShL0GpqZ_compressed.png" />
+    <Content Include="img\ES75KXyqMx22wR3\whhxGNQG8OOo0iA.png" />
+    <Content Include="img\ES75KXyqMx22wR3\whhxGNQG8OOo0iA_compressed.png" />
+    <Content Include="img\evPJOK5auz2rRqO.png" />
+    <Content Include="img\evPJOK5auz2rRqO_compressed.png" />
+    <Content Include="img\f03qxsnsHz.png" />
+    <Content Include="img\f03qxsnsHz_compressed.png" />
+    <Content Include="img\Fj5B7hEnjOai7kZ.png" />
+    <Content Include="img\FJcEUtvHOkJJWkP.png" />
+    <Content Include="img\FJcEUtvHOkJJWkP_compressed.png" />
+    <Content Include="img\fTvBL0MoO1EqsLU.png" />
+    <Content Include="img\fTvBL0MoO1EqsLU_compressed.png" />
+    <Content Include="img\g5U0TBAIA3ZId8B.png" />
+    <Content Include="img\g5U0TBAIA3ZId8B_compressed.png" />
+    <Content Include="img\gF0XOa3BiaLa5AW.png" />
+    <Content Include="img\gFM7Oo8FpfeQQjN.png" />
+    <Content Include="img\GMtXNtpHZaO85Dr.png" />
+    <Content Include="img\GMtXNtpHZaO85Dr_compressed.png" />
+    <Content Include="img\hgZejvnOsRrJ5fo.png" />
+    <Content Include="img\hgZejvnOsRrJ5fo_compressed.png" />
+    <Content Include="img\hi8oj8mchQbh4R3.png" />
+    <Content Include="img\HwhBgq4TjA55MXY.png" />
+    <Content Include="img\HwhBgq4TjA55MXY_compressed.png" />
+    <Content Include="img\ih8vgRq6oY1fEIu.png" />
+    <Content Include="img\jtWVlWvayS9jXjH.png" />
+    <Content Include="img\jtWVlWvayS9jXjH_compressed.png" />
+    <Content Include="img\k1tYxJyti5CwDHt.png" />
+    <Content Include="img\kwxquvSz6akwp36.png" />
+    <Content Include="img\LNj6Ny81orFEd8a.png" />
+    <Content Include="img\M7hXyPZSF6EpdsW.png" />
+    <Content Include="img\M7hXyPZSF6EpdsW_compressed.png" />
+    <Content Include="img\msS38oK0OU.png" />
+    <Content Include="img\msS38oK0OU_compressed.png" />
+    <Content Include="img\MV1b8kZAkuS11hd.png" />
+    <Content Include="img\MV1b8kZAkuS11hd_compressed.png" />
+    <Content Include="img\oIbIvdKaSBNsfyc.png" />
+    <Content Include="img\oIbIvdKaSBNsfyc_compressed.png" />
+    <Content Include="img\ON0YJ2fo5A.png" />
+    <Content Include="img\ON0YJ2fo5A_compressed.png" />
+    <Content Include="img\OXeWuz9zHodNwfA.png" />
+    <Content Include="img\OXeWuz9zHodNwfA_compressed.png" />
+    <Content Include="img\PGk4qPvHgJS1aIh.png" />
+    <Content Include="img\PGk4qPvHgJS1aIh_compressed.png" />
+    <Content Include="img\PS49DQCy4gfqoFW.png" />
+    <Content Include="img\PS49DQCy4gfqoFW_compressed.png" />
+    <Content Include="img\PUwUMWceBZjgS8X.png" />
+    <Content Include="img\PUwUMWceBZjgS8X_compressed.png" />
+    <Content Include="img\QmKXgtFhcv3KgHh.png" />
+    <Content Include="img\QmKXgtFhcv3KgHh_compressed.png" />
+    <Content Include="img\siC8j7Sa1IkXSoX.png" />
+    <Content Include="img\siC8j7Sa1IkXSoX_compressed.png" />
+    <Content Include="img\SuQ7ZsgeeRXB90p.png" />
+    <Content Include="img\SuQ7ZsgeeRXB90p_compressed.png" />
+    <Content Include="img\uxfaG9ivA56tRGW.png" />
+    <Content Include="img\uxfaG9ivA56tRGW_compressed.png" />
+    <Content Include="img\VFd9y3bR0v.png" />
+    <Content Include="img\VFd9y3bR0v_compressed.png" />
+    <Content Include="img\vJFHgusuKVr4gM8.png" />
+    <Content Include="img\vJFHgusuKVr4gM8_compressed.png" />
+    <Content Include="img\vjUezzeEjTzfQcl.png" />
+    <Content Include="img\vjUezzeEjTzfQcl_compressed.png" />
+    <Content Include="img\vofZKYDRLkIh7ze.png" />
+    <Content Include="img\vofZKYDRLkIh7ze_compressed.png" />
+    <Content Include="img\wg4d5zlBcNfJQaA.png" />
+    <Content Include="img\wg4d5zlBcNfJQaA_compressed.png" />
+    <Content Include="img\wm0vej6AxZOMg8H.png" />
+    <Content Include="img\wm0vej6AxZOMg8H_compressed.png" />
+    <Content Include="img\wu0b4jzD5zdDAa4.png" />
+    <Content Include="img\wu0b4jzD5zdDAa4_compressed.png" />
+    <Content Include="img\xQNSYFpBBr.png" />
+    <Content Include="img\xQNSYFpBBr_compressed.png" />
+    <Content Include="img\y79uEENavrcD1r8.png" />
+    <Content Include="img\y79uEENavrcD1r8_compressed.png" />
+    <Content Include="img\Y7s9EW2lfWR5ZG3.png" />
+    <Content Include="img\Y7s9EW2lfWR5ZG3_compressed.png" />
+    <Content Include="img\YilpAnRyfvNrIQ8.png" />
+    <Content Include="img\YilpAnRyfvNrIQ8_compressed.png" />
+    <Content Include="img\ywXYm1GEhBgRTH6.png" />
+    <Content Include="img\ywXYm1GEhBgRTH6_compressed.png" />
+    <Content Include="img\zwjLtEYZYVRvRq0.png" />
+    <Content Include="img\zwjLtEYZYVRvRq0_compressed.png" />
+>>>>>>> hotfix
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\ScreenTakerDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScreenTakerDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ScreenTakerDataModel.edmx.diagram">
+      <DependentUpon>ScreenTakerDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="img\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
-    <Content Include="ScreenTakerDM.Context.tt">
+    <Content Include="Models\ScreenTakerDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
-      <LastGenOutput>ScreenTakerDM.Context.cs</LastGenOutput>
+      <DependentUpon>ScreenTakerDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScreenTakerDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ScreenTakerDM.tt">
+    <Content Include="Models\ScreenTakerDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScreenTakerDM.edmx</DependentUpon>
-      <LastGenOutput>ScreenTakerDM.cs</LastGenOutput>
+      <DependentUpon>ScreenTakerDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScreenTakerDataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\email.png" />
+    <Content Include="Resources\error.png" />
+    <Content Include="Resources\favicon.png" />
+    <Content Include="Resources\info.png" />
+    <Content Include="Resources\loadingAnimation.gif" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\Ok.png" />
+    <Content Include="Resources\printscreen.png" />
+    <Content Include="Resources\private.png" />
+    <Content Include="Resources\private_front.png" />
+    <Content Include="Resources\private_full.png" />
+    <Content Include="Resources\private_shared.png" />
+    <Content Include="Resources\public.png" />
+    <Content Include="Resources\public_front.png" />
+    <Content Include="Resources\public_full.png" />
+    <Content Include="Resources\public_shared.png" />
+    <Content Include="Resources\sad.png" />
+    <Content Include="Resources\user.png" />
+    <Content Include="Resources\warning.png" />
     <Content Include="Scripts\abutment.js" />
     <Content Include="Scripts\alert.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
@@ -316,10 +575,15 @@
     <Content Include="Scripts\carousel.js" />
     <Content Include="Scripts\collapse.js" />
     <Content Include="Scripts\constraint.js" />
+    <Content Include="Scripts\context-menu.js" />
     <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -336,13 +600,16 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\scrollspy.js" />
     <Content Include="Scripts\shift.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\tab.js" />
     <Content Include="Scripts\tether.js" />
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -355,9 +622,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Welcome.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
@@ -380,10 +646,37 @@
     <Content Include="Views\Home\Images.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Edit\UserGroups.cshtml" />
+<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
+=======
+    <Content Include="Views\Home\SingleImage.cshtml" />
+    <Content Include="Views\Edit\EditImage.cshtml" />
+    <Content Include="Views\Home\SharedImage.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Home\SharedFolder.cshtml" />
+    <Content Include="Views\Edit\Partial_GroupsAndEmails.cshtml" />
+    <Content Include="Views\Account\Partial_SetAvatar.cshtml" />
+    <Content Include="Views\Home\PartialImagesMoveCreateFolder.cshtml" />
+    <Content Include="Views\Home\PartialSingleImageMoveCreateFolder.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ConfirmEmailInfo.cshtml" />
+    <Content Include="Views\Home\Message.cshtml" />
+    <Content Include="Views\Home\SharedLibrary.cshtml" />
+    <Content Include="Views\Home\PartialImagesChangeState.cshtml" />
+    <Content Include="Views\Home\PartialFoldersChangeState.cshtml" />
+    <Content Include="Views\Home\SingleImageChangeState.cshtml" />
+    <Content Include="Views\Home\PartialLibraryAccess.cshtml" />
+    <Content Include="Views\Home\PartialImagesAccess.cshtml" />
+    <Content Include="Views\Manage\EmailConfirmation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\File\" />
+>>>>>>> hotfix
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -393,6 +686,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Resource.en.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resource.en.designer.cs</LastGenOutput>
@@ -405,6 +699,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+=======
+>>>>>>> hotfix
     <Content Include="App_GlobalResources\Resource.en.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resource.en.designer.cs</LastGenOutput>
@@ -422,6 +718,21 @@
       <LastGenOutput>Resource.uk.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Resource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Migrations\201605271430553_TestMigration.resx">
+      <DependentUpon>201605271430553_TestMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605271605440_TestInit.resx">
+      <DependentUpon>201605271605440_TestInit.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+>>>>>>> hotfix
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

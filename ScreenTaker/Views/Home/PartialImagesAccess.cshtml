@@ -1,0 +1,190 @@
+﻿@{
+        if (!Request.QueryString["lang"].IsEmpty())
+        {
+            Culture = UICulture = Request.QueryString["lang"];
+        }
+        else
+        {
+            Culture = UICulture = ViewBag.Localize ?? "en";
+        }
+    
+}
+<div class="modal-header">
+    <button type="button" class="close btn-not-rounded" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="gridSystemModalLabel">@Resources.Resource.MANAGE_ACCESS</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" id="sharedLink" style="height: 30px;" 
+                   onclick="selectText();"
+                   class="form-control" value="@ViewBag.ImageSharedLink" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <h5 style="vertical-align:middle;margin:0;margin-top:5px;">@Resources.Resource.PEOPLE</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-group" style="height:auto;height:150px;overflow:auto;border:solid #E0E0E0 1px;">
+                        @if (ViewBag.AllowedUsers != null)
+                        {
+                            for (int i = 0; i < ViewBag.AllowedUsers.Count; i++)
+                            {
+                                string classes = "list-group-item";
+                                if (ViewBag.AreUserRightsInherited[i])
+                                {
+                                    classes += " disabled-list-group-item";
+                                }
+                                <div class="@classes">                                                                                                        
+                                    <div  class="media-left" style="vertical-align: middle;" >                                        
+                                    @if (ViewBag.AreUserRightsInherited[i])
+                                    {
+                                            <button disabled type="button" class="btn badge right" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-remove glyphicon-th-large" aria-hidden="true"></span>
+                                            </button>
+                                    }
+                                    else
+                                    {
+                                            <button type="button" class="btn badge right" aria-label="Left Align" 
+                                                onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                                url: 'ImageAccessRemoveUser',
+                                                data: {
+                                                    email: '@ViewBag.AllowedUsers[i]',
+                                                    imageId: document.getElementById('Idhidden').value,
+                                                },
+                                                success: function (data) {
+                                                    $('#ImagesAccessDynamic').html(data);
+                                                 if(document.getElementById('MessageContentFromPartial').value!='')
+                                                        {
+                                                            $('#Message').modal('show');
+                                                            document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                            document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                                        }
+                                                }
+                                            });">
+                                            <span class="glyphicon glyphicon-remove glyphicon-th-large" aria-hidden="true"></span>
+                                        </button>
+                                    }
+                                    </div>
+                                    <div class="media-body" style="vertical-align: middle">
+                                        <h5 class="media-heading">@ViewBag.AllowedUsers[i]</h5>
+                                    </div> 
+                                </div>
+                            }
+                        }                                            
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <input type="email" id="userMail" class="form-control" placeholder="@Resources.Resource.EMAIL" aria-describedby="sizing-addon2" data-autocomplete-source="@Url.Action("AutocompleteSearchEmails", "Edit")"
+                        onkeyup="CheckEmail(this)" onblur="CheckEmail(this)" onfocus="CheckEmail(this)" onchange="CheckEmail(this)" onmouseover="CheckEmail(this)">
+                        <span class="input-group-addon btn btn-default" aria-label="Left Align" id="sizing-addon2" onmouseover="CheckEmail($('#userMail'))"
+                              onclick="$('#loadingAnimation').css('visibility', 'visible');
+                              $.ajax({
+                            url: 'ImageAccessAddUser',
+                            data: {
+                                email: document.getElementById('userMail').value,
+                                imageId: document.getElementById('Idhidden').value,        
+                            },
+                            success: function (data) {
+                                $('#ImagesAccessDynamic').html(data);
+                                if (document.getElementById('MessageContentFromPartial').value != '') {
+                                    $('#Message').modal('show');
+                                    document.getElementById('MessageContent').innerHTML = document.getElementById('MessageContentFromPartial').value;
+                                    document.getElementById('MessageTitle').innerHTML = 'Error';
+                                }
+                            }
+                        });">+</span>       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-12">
+                    <h5 style="vertical-align:middle;margin:0;margin-top:5px;">@Resources.Resource.GROUPS</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-group" style="height:auto;height:205px;overflow:auto;border:solid #E0E0E0 1px;">
+                        @if (ViewBag.AllGroups != null)
+                        {
+                            for (int i = 0; i < ViewBag.AllGroups.Count; i++)
+                            {
+                                string classes = "";
+                                if (ViewBag.AreGroupRightsInherited[i])
+                                {
+                                    classes = "disabled-list-group-item";
+                                }
+                                <div class="list-group-item @classes">
+                                    <div class="material-switch media-left" style="vertical-align: middle">
+                                        @if (ViewBag.GroupsAccess[i] || ViewBag.AreGroupRightsInherited[i])
+                                        {
+                                            if (!ViewBag.AreGroupRightsInherited[i])
+                                            {
+                                                <input id="foldersAccessSwitch @i" type="checkbox" checked />
+                                            }
+                                            else
+                                            {
+                                                <input id="foldersAccessSwitch @i" type="checkbox" checked disabled/>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <input id="foldersAccessSwitch @i" type="checkbox" />
+                                        }
+                                        @if (!ViewBag.AreGroupRightsInherited[i]){
+                                        <label for="foldersAccessSwitch @i" class="label-info" 
+                                        onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                        url: 'ImageAccessSwitchGroupsAccess',
+                                        data: {
+                                            groupId: @ViewBag.GroupsIDs[i],
+                                            imageId: document.getElementById('Idhidden').value,
+                                        },
+                                        success: function (data) {
+                                            $('#ImagesAccessDynamic').html(data);
+                                            if(document.getElementById('MessageContentFromPartial').value!='')
+                                            {
+                                                $('#Message').modal('show');
+                                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                document.getElementById('MessageTitle').innerHTML='Error';
+                                            }
+                                        }
+                                        });" />
+                                        }
+                                        else{
+                                        <label for="foldersAccessSwitch @i" class="label-info" onclick=""/>
+                                        }
+                                    </div>
+                                    <div class="media-body" style="vertical-align: middle">
+                                        <h5 class="media-heading">@ViewBag.AllGroups[i]</h5>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.MessageContent != null)
+{
+    <input type="hidden" id="MessageContentFromPartial" value="@ViewBag.MessageContent" />
+}
+else
+{
+    <input type="hidden" id="MessageContentFromPartial" value="" />
+}
+
+<script src="~/Scripts/Site.js"></script>

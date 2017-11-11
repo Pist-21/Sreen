@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Confirm Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (!Request.QueryString["lang"].IsEmpty())
+    {
+        Culture = UICulture = Request.QueryString["lang"];
+    }
+    else
+    {
+        Culture = UICulture = ViewBag.Localize ?? "en";
+    }
+}
+
+<div class="container account-form">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 account-style shadow center-block">
+            <section id="emailConfirmInfo">
+                <div class="col-md-12 text-center center-block">
+                    <div class="row text-center" style="margin-top: 5px">
+                        <img src="~/Resources/email.png"/>
+                    </div>
+                    <div class="text-md-center">
+                        <h4 class="text-center">
+                            @Resources.Resource.HAVE_SENT <a href="#">@ViewBag.Email</a> @Resources.Resource.TO_CONFIRM
+                        </h4>
+                    </div>
+                    <hr />
+                    <div class="text-md-center" style=" margin-bottom: 5px">
+                        <h4 class="text-center">
+                            @Resources.Resource.IF_NOT_GOT,
+                        </h4>
+                        <a href="@Url.Action("ResendConfirmation", "Account", new {email = ViewBag.Email})" class="account-link" onclick="$('#loadingAnimation').css('visibility', 'visible')" style="font-size: 14px; text-decoration: none;">
+                            <h4>@Resources.Resource.RESEND_AGAIN</h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

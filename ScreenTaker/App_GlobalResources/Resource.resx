@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABOUTST_TEXT" xml:space="preserve">
+    <value>ScreenTaker is the fastest way to share a screenshot and images without needing any downloads or installations. It’s designed with your workflow in mind by using only a minimum number of keypresses to share your images.</value>
+  </data>
+  <data name="ABOUT_ST" xml:space="preserve">
+    <value>About Screen Taker</value>
+  </data>
+  <data name="ACCESS_BY_LINK" xml:space="preserve">
+    <value>Access by link</value>
+  </data>
+  <data name="ACCESS_DENIED" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="ACC_DENIED_DESCR" xml:space="preserve">
+    <value>Image owner has restricted access to this resource</value>
+  </data>
+  <data name="ACTIVATE" xml:space="preserve">
+    <value>Please activate your account by confirming this email address</value>
+  </data>
+  <data name="ACTIVATE_NOW" xml:space="preserve">
+    <value>Activate now</value>
+  </data>
+  <data name="ADD" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ADD_NEW_FOLDER" xml:space="preserve">
+    <value>Add new folder</value>
+  </data>
+  <data name="ALLOWED" xml:space="preserve">
+    <value>Allowed</value>
+  </data>
+  <data name="ALPHABET" xml:space="preserve">
+    <value>Alphabet</value>
+  </data>
+  <data name="ALREADY_HAVE_ACC" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="ALTERNATIVE" xml:space="preserve">
+    <value>Alternative :</value>
+  </data>
+  <data name="AS_NEW_USER" xml:space="preserve">
+    <value>Register as a new user</value>
+  </data>
+  <data name="AUTO" xml:space="preserve">
+    <value>This is an automated email. </value>
+  </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CAPTURING_FS" xml:space="preserve">
+    <value>Capturing full screen</value>
+  </data>
+  <data name="CAPTURING_TEXT" xml:space="preserve">
+    <value>The Print Screen key is your universal screen capture button. It’s located near the top right area of your keyboard, and is sometimes abbreviated to something like “Prt Scr”. You can use it anywhere. Just press it once and it’ll take a snapshot of whatever is curently on your screen and store it in your clipboard. Then, save it just open up ScreenTaker and paste it by pressing Upload image.</value>
+  </data>
+  <data name="CHANGE_PASS" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="CHANGE_PROFILE_IMG" xml:space="preserve">
+    <value>Change your profile image</value>
+  </data>
+  <data name="CLASSIC" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CONFIRMATION" xml:space="preserve">
+    <value>Email confirmation</value>
+  </data>
+  <data name="CONFIRM_PASS" xml:space="preserve">
+    <value>Confirm a new password</value>
+  </data>
+  <data name="CONF_PASS" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="COPY" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CREATE" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CREATE_NEW_ACC" xml:space="preserve">
+    <value>Create a new account to keep track of your pasted images</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DELETE_FOLDER" xml:space="preserve">
+    <value>Delete folder</value>
+  </data>
+  <data name="DELETE_IMAGE" xml:space="preserve">
+    <value>Delete image</value>
+  </data>
+  <data name="DENIED" xml:space="preserve">
+    <value>Denied</value>
+  </data>
+  <data name="DEVELOPED_BY" xml:space="preserve">
+    <value>Developed by</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EDIT_GROUP" xml:space="preserve">
+    <value>Edit groups</value>
+  </data>
+  <data name="EDIT_GROUPS" xml:space="preserve">
+    <value>Edit groups</value>
+  </data>
+  <data name="EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ENTER_EMAIL" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="ENTER_NEW_PASS" xml:space="preserve">
+    <value>Enter a new password</value>
+  </data>
+  <data name="ERR_ADD_YOURSELF" xml:space="preserve">
+    <value>You can't add yourself</value>
+  </data>
+  <data name="ERR_EMAIL_NOT_EXIST" xml:space="preserve">
+    <value>There is no user with such email</value>
+  </data>
+  <data name="ERR_EMAIL_NOT_VALID" xml:space="preserve">
+    <value>Email is not valid</value>
+  </data>
+  <data name="ERR_EMPTY_FIELD" xml:space="preserve">
+    <value>Field should not be empty</value>
+  </data>
+  <data name="ERR_FOLDER_ALREDY" xml:space="preserve">
+    <value>There is alredy a folder with this name</value>
+  </data>
+  <data name="ERR_GROUP_ALREDY" xml:space="preserve">
+    <value>There is alredy a group with this name</value>
+  </data>
+  <data name="ERR_IMAGE_NOT_VALID" xml:space="preserve">
+    <value>Uploading file should be image (BMP, JPEG, PNG or GIF)</value>
+  </data>
+  <data name="ERR_INHERITED" xml:space="preserve">
+    <value>This right is inherited and can't be changed</value>
+  </data>
+  <data name="ERR_PUBLIC_IN_PRIVATE" xml:space="preserve">
+    <value>You can't make public image in private folder</value>
+  </data>
+  <data name="ERR_TITLE" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ERR_USER_ALREDY" xml:space="preserve">
+    <value>This user is alredy here</value>
+  </data>
+  <data name="FEATURES" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="FEATURES_TEXT" xml:space="preserve">
+    <value>Register an account to manage and delete your old images.
+Designed with power-users in mind, ScreenTaker has a fast workflow that requires only the minimum number of keypresses.</value>
+  </data>
+  <data name="FOLDERS" xml:space="preserve">
+    <value>My folders</value>
+  </data>
+  <data name="FOLDERY" xml:space="preserve">
+    <value>folder</value>
+  </data>
+  <data name="FORGOT_PASS" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="GROUPS" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="GROUP_NAME" xml:space="preserve">
+    <value>Group name</value>
+  </data>
+  <data name="HAVE_SENT" xml:space="preserve">
+    <value>We have sent mail to</value>
+  </data>
+  <data name="IF_NOT_GOT" xml:space="preserve">
+    <value>If you not got any mail</value>
+  </data>
+  <data name="IMAGES" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="IMAGEY" xml:space="preserve">
+    <value>image</value>
+  </data>
+  <data name="INCORRECT_PASSWORD" xml:space="preserve">
+    <value>The password is incorrect</value>
+  </data>
+  <data name="INVALID_LOGIN_ATTEMPT" xml:space="preserve">
+    <value>Invalid login attempt</value>
+  </data>
+  <data name="JUMBOTRON_TEXT" xml:space="preserve">
+    <value>The easiest way to share your images.</value>
+  </data>
+  <data name="LOGIN_EMAIL" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LOGOUT" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="MAKE_PRIVATE" xml:space="preserve">
+    <value>Make private</value>
+  </data>
+  <data name="MAKE_PUBLIC" xml:space="preserve">
+    <value>Make public</value>
+  </data>
+  <data name="MANAGE_ACCESS" xml:space="preserve">
+    <value>Manage access</value>
+  </data>
+  <data name="MANAGE_GROUPS" xml:space="preserve">
+    <value>Manage groups</value>
+  </data>
+  <data name="MAX_NAME_LENGTH" xml:space="preserve">
+    <value>Maximum lenght: 20 symbols</value>
+  </data>
+  <data name="MOVE" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="MOVE_HERE" xml:space="preserve">
+    <value>Move here</value>
+  </data>
+  <data name="MOVE_IMAGE" xml:space="preserve">
+    <value>Move image to</value>
+  </data>
+  <data name="NEW_FOLDER" xml:space="preserve">
+    <value>New folder</value>
+  </data>
+  <data name="NEW_FOLDER_TITLE" xml:space="preserve">
+    <value>Enter a title for new folder</value>
+  </data>
+  <data name="NEW_PASS" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NOT_FOUND" xml:space="preserve">
+    <value>The page you are looking for cannot be found</value>
+  </data>
+  <data name="OFF" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="OLD_PASS" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="ON" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="OPEN" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OWNER" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="PASSWORD" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PASSWORD_CHANGE" xml:space="preserve">
+    <value>Password changed</value>
+  </data>
+  <data name="PASSWORD_CHANGE_SUCCESS" xml:space="preserve">
+    <value>Your password has been successfully changed.</value>
+  </data>
+  <data name="PASSWORD_CONFIRM" xml:space="preserve">
+    <value>Password confirm</value>
+  </data>
+  <data name="PASSWORD_FORGOT" xml:space="preserve">
+    <value>Please check your email to reset your password</value>
+  </data>
+  <data name="PASSWORD_RESET" xml:space="preserve">
+    <value>Your password has been reset</value>
+  </data>
+  <data name="PEOPLE" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="PRIVATE" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="PROFILE_HEAD" xml:space="preserve">
+    <value>Profile settings</value>
+  </data>
+  <data name="REMOVE" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RENAME" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="RENAME_TITLE" xml:space="preserve">
+    <value>Enter new title for folder</value>
+  </data>
+  <data name="RENAME_TITLE_IMAGE" xml:space="preserve">
+    <value>Enter new title for image</value>
+  </data>
+  <data name="RESEND_AGAIN" xml:space="preserve">
+    <value>Resend confirmation mail again</value>
+  </data>
+  <data name="RESET_PASSWORD_EMAIL" xml:space="preserve">
+    <value>Click this {0} default</value>
+  </data>
+  <data name="RETURN_TO_LOGIN" xml:space="preserve">
+    <value>Return to Log in</value>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SAVED_AS" xml:space="preserve">
+    <value>Saved as</value>
+  </data>
+  <data name="SAVE_CHANGES" xml:space="preserve">
+    <value>Save changes?</value>
+  </data>
+  <data name="SEARCH_FOR" xml:space="preserve">
+    <value>Search for</value>
+  </data>
+  <data name="SEND" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SHARED_FOLDERS" xml:space="preserve">
+    <value>Available to me</value>
+  </data>
+  <data name="SHARE_FOLDER" xml:space="preserve">
+    <value>Share folder</value>
+  </data>
+  <data name="SHARE_LINK" xml:space="preserve">
+    <value>Share link</value>
+  </data>
+  <data name="SIGNIN_LOGOUT" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="SORRY" xml:space="preserve">
+    <value>We're sorry ...</value>
+  </data>
+  <data name="SUBMIT" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SUCCESS_COPY" xml:space="preserve">
+    <value>Сongratulation</value>
+  </data>
+  <data name="SUCCESS_COPY_TEXT" xml:space="preserve">
+    <value>Link successfully copied</value>
+  </data>
+  <data name="TO_CONFIRM" xml:space="preserve">
+    <value>to confirm of validity of your email address. After receiving the mail follow the link provided to complete your registration</value>
+  </data>
+  <data name="TO_MAIN_PAGE" xml:space="preserve">
+    <value>Return to homepage</value>
+  </data>
+  <data name="TURN_OFF" xml:space="preserve">
+    <value>Turn Off</value>
+  </data>
+  <data name="TURN_ON" xml:space="preserve">
+    <value>Turn On</value>
+  </data>
+  <data name="UPLOAD" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UPLOAD_IMAGE" xml:space="preserve">
+    <value>Upload image</value>
+  </data>
+  <data name="UPLOAD_NEW_IMAGE" xml:space="preserve">
+    <value>Upload new image</value>
+  </data>
+  <data name="USE_ACCOUNT" xml:space="preserve">
+    <value>Use your account to log in</value>
+  </data>
+  <data name="WANT_DELETE" xml:space="preserve">
+    <value>Do you really want to delete </value>
+  </data>
+  <data name="WELCOME" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="YOUR_OLD_PASS" xml:space="preserve">
+    <value>Your old password</value>
+  </data>
+</root>
