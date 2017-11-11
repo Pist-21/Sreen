@@ -61,16 +61,6 @@ namespace ScreenTaker.Controllers
             return View();
         }
 
-        public ActionResult Profile()
-        {
-            return View();
-        }
-
-        public ActionResult Logout()
-        {
-            return View();
-        }
-
         //
         // POST: /Account/Login
         [HttpPost]
