@@ -17,16 +17,10 @@
                 </div>
                 <div class="col-md-4">
                     @using (Html.BeginForm("", "Home/Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
-<<<<<<< HEAD
-                    {
-                        @*<input type="file" name="file" />*@
-                        <input class="btn btn-primary btn-lg center-block" type="submit" />
-=======
                     { 
                         <input id="fileInput" style="visibility:collapse" type="file" name="file" onchange="document.getElementById('fileSubmit').click();" />
                         <input id="fileSubmit" style="visibility:collapse" type="submit" value="bla" />
                         <input type="button" class="btn btn-primary btn-lg center-block" style="width:200px; height:70px;" value="Upload image" onclick="document.getElementById('fileInput').click();" />
->>>>>>> hotfix
                     }
                 </div>
                 <div class="col-md-4">
@@ -47,11 +41,7 @@
                     <h2>About Screen Taker</h2>
                     <p>@ViewBag.LorenIpsum</p>
                 </div>
-<<<<<<< HEAD
-                <div class="col-md-2">
-=======
                 <div class="col-md-1">
->>>>>>> hotfix
                 </div>
             </div>
             <div class="row">

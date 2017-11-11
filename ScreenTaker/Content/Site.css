@@ -17,19 +17,11 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-<<<<<<< HEAD
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
-=======
-/*input,
-//select,
-//textarea {
-//    max-width: 280px;
-//}*/
->>>>>>> hotfix
 
 .library-menu {
     background-color: #686868;
@@ -50,12 +42,6 @@ textarea {
     background-color: #F0F0F0;
 }
 
-<<<<<<< HEAD
-.background-color-welcome{
-    color: dimgrey;
-}
-=======
->>>>>>> hotfix
 
 .welcome-image{
 }
@@ -74,8 +60,6 @@ textarea {
     font-weight:300;
     line-height:1.4;
 }
-<<<<<<< HEAD
-=======
 
 .vert_menu{   overflow: hidden;  width: 100%; }
 .vert_menu li{  float: left; margin-right:55px; margin-left:-40px; }
@@ -111,7 +95,6 @@ textarea {
 
 .vert_menu a::after{   z-index: 3;  border-left-color: #525252;   }
 .vert_menu a::before{   z-index: 2;  }
->>>>>>> hotfix
 /*======================///////////////
 			START RESPONSIVE STYLE
 =====================///////////////////////*/
@@ -151,8 +134,6 @@ textarea {
 
 }
 
-<<<<<<< HEAD
-=======
 .shadow {
     box-shadow: 5px 5px 0 #000000;
 }
@@ -180,10 +161,9 @@ textarea {
     color: #AAAAAA;
 }
 
-.login-signup-center{
+.profile-avatar {
+    width: 128px;
+    height: 128px;
 }
 
-
-
->>>>>>> hotfix
 	

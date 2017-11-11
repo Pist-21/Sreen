@@ -1,23 +1,5 @@
 ﻿@{
     ViewBag.Title = "Images";
-<<<<<<< HEAD
-    int id = 0;
-}
-
-<h2>Images</h2>
-
-<div class="row">
-    @for (int i = 0; i < ViewBag.Images.Count; i++)
-    {
-        <a href="/Home/SingleImage/@id" id="@id">
-            <div class="col-md-2 text-center">
-                <img src="~/fonts/private.png"/>
-                <label class="text-center" style="padding-left: 10px">@ViewBag.Images[i]</label>
-            </div>
-        </a>
-        id++;
-    }
-=======
     string ShareLink = ViewBag.BASE_URL + @ViewBag.Images[0].sharedCode + ".png";
     string CommpressedLink = ViewBag.BASE_URL + @ViewBag.Images[0].sharedCode + "_compressed.png";
     string Name = @ViewBag.Images[0].name + ".png";
@@ -87,5 +69,4 @@
             <hr />
         </div>
     </div>
->>>>>>> hotfix
 </div>

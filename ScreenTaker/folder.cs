@@ -12,19 +12,6 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
-<<<<<<< HEAD
-    public partial class folder
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public folder()
-        {
-            this.image = new HashSet<image>();
-            this.groupShare = new HashSet<groupShare>();
-            this.userShare = new HashSet<userShare>();
-        }
-    
-        public int id { get; set; }
-=======
     public partial class Folder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -35,22 +22,10 @@ namespace ScreenTaker
             this.UserShare = new HashSet<UserShare>();
         }
     
->>>>>>> hotfix
         public string name { get; set; }
         public int ownerId { get; set; }
         public bool isPublic { get; set; }
         public string sharedCode { get; set; }
-<<<<<<< HEAD
-        public Nullable<System.DateTime> publicationDate { get; set; }
-    
-        public virtual person person { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<image> image { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<groupShare> groupShare { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userShare> userShare { get; set; }
-=======
         public System.DateTime publicationDate { get; set; }
         public int id { get; set; }
     
@@ -61,6 +36,5 @@ namespace ScreenTaker
         public virtual ICollection<GroupShare> GroupShare { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserShare> UserShare { get; set; }
->>>>>>> hotfix
     }
 }

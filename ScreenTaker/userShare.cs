@@ -12,29 +12,16 @@ namespace ScreenTaker
     using System;
     using System.Collections.Generic;
     
-<<<<<<< HEAD
-    public partial class userShare
-    {
-        public int id { get; set; }
-=======
     public partial class UserShare
     {
->>>>>>> hotfix
         public Nullable<int> personId { get; set; }
         public Nullable<int> imageId { get; set; }
         public Nullable<int> folderId { get; set; }
         public string email { get; set; }
-<<<<<<< HEAD
-    
-        public virtual folder folder { get; set; }
-        public virtual image image { get; set; }
-        public virtual person person { get; set; }
-=======
         public int id { get; set; }
     
         public virtual Folder Folder { get; set; }
         public virtual Image Image { get; set; }
         public virtual Person Person { get; set; }
->>>>>>> hotfix
     }
 }
