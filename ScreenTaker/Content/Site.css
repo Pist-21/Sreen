@@ -16,7 +16,11 @@
     white-space: normal;
 }
 
+<<<<<<< HEAD
  Set width on the form input elements since they're 100% wide by default 
+=======
+/* Set width on the form input elements since they're 100% wide by default */
+>>>>>>> master
 input,
 select,
 textarea {
@@ -134,6 +138,7 @@ textarea {
 
 }
 
+<<<<<<< HEAD
 .shadow {
     box-shadow: 5px 5px 0 #000000;
 }
@@ -166,4 +171,6 @@ textarea {
 
 
 
+=======
+>>>>>>> master
 	
