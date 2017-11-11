@@ -61,6 +61,16 @@ namespace ScreenTaker.Controllers
             return View();
         }
 
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            return View();
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -481,13 +491,5 @@ namespace ScreenTaker.Controllers
             }
         }
         #endregion
-        [AllowAnonymous]
-        public ActionResult UserProfile()
-        {
-            ViewBag.Avatar = "~/img/user.png";
-            ViewBag.Email = "test@gmail.com";
-
-            return View();
-        }
     }
 }
