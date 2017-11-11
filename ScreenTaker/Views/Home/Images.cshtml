@@ -1,69 +1,769 @@
 ﻿@{
-    ViewBag.Title = "Images";
-    string ShareLink = ViewBag.BASE_URL + @ViewBag.Images[0].sharedCode + ".png";
-    string CommpressedLink = ViewBag.BASE_URL + @ViewBag.Images[0].sharedCode + "_compressed.png";
-    string Name = @ViewBag.Images[0].name + ".png";
+    ViewBag.Title = ViewBag.FolderName;
+
+    if (!Request.QueryString["lang"].IsEmpty())
+    {
+        Culture = UICulture = Request.QueryString["lang"];
+    }
+    else
+    {
+        Culture = UICulture = ViewBag.Localize ?? "en";
+    }
+
+}
+@section Scripts {
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+<link href="@Url.Content("~/Content/themes/base/autocomplete.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/themes/base/theme.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.min.js")" type="text/javascript"></script>
+
+    <script>
+        $(function () {
+            $("[data-autocomplete-source]").each(function () {
+                var target = $(this);
+                target.autocomplete({ source: target.attr("data-autocomplete-source") });
+            });
+        });
+        var a = $('#loadingAnimation');
+        a.css('visibility', 'hidden');
+        $(document).ajaxStop(function () {
+            a.css('visibility', 'hidden');
+            $(function () {
+                $("[data-autocomplete-source]").each(function () {
+                    var target = $(this);
+                    target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                });
+            });
+        });
+        $('#toggle_event_editing button').click(function () {
+            $('#MakePublicButton').click();
+        });
+        document.getElementById("openSideMenu").style.disabled = false;
+
+        document.getElementById("RenameButton").disabled = true;
+        document.getElementById("DeleteButton").disabled = true;
+        document.getElementById("OpenButton").disabled = true;
+        document.getElementById("MoveButton").disabled = true;
+        document.getElementById("ManageAccessButton").disabled = true;
+        document.getElementById("MakePublicButton").disabled = true;
+        document.getElementById("sharedLink").disabled = true;
+        document.getElementById("sharedLink").value = "";
+        document.getElementById("new-title").value = "";
+        document.getElementById("imageNameDelete").innerText = "";
+        document.getElementById("compressedLink").src = "";
+        document.getElementById("compressedName").innerText = "";
+
+        document.getElementById("IMD0").className += " active-image";
+        document.getElementById("RenameButton").disabled = false;
+        document.getElementById("DeleteButton").disabled = false;
+        document.getElementById("OpenButton").disabled = false;
+        document.getElementById("MoveButton").disabled = false;
+        document.getElementById("ManageAccessButton").disabled = false;
+        document.getElementById("MakePublicButton").disabled = false;
+        document.getElementById("sharedLink").disabled = false;
+        var title = '@ViewBag.FirstImageName';
+        var name = title.replace(/#039/g,"'");
+        name =  name.replace(/&lt/g,"<");
+        name =  name.replace(/&gt/g,">");
+        name =  name.replace(/&quot/g,"\"");
+        document.getElementById("original").value = '@ViewBag.FirstImageShCode';
+        document.getElementById("sharedLink").value = '@ViewBag.FirstImageShLink';
+        document.getElementById("compressedLink").src = '@ViewBag.FirstImageSrc';
+        document.getElementById("compressedName").innerText = name;
+        document.getElementById("new-title").value = name;
+        document.getElementById("imageNameDelete").innerText = name;
+
+        document.getElementById("sharedLinkhidden").value = '@ViewBag.FirstImageShCode';
+        document.getElementById("Idhidden").value = '@ViewBag.FirstId';
+        var public_private = '@Resources.Resource.MAKE_PRIVATE';
+        if('@ViewBag.ImageIsPublic'=="False")public_private = '@Resources.Resource.MAKE_PUBLIC';
+        document.getElementById("MakePublicButton").innerText = public_private;
+
+        function selectImage(id, image_id, count, sharedCode, original, sharedLink, compressed, name,isPublic) {
+            name =  name.replace(/&#039/g,"'");
+            document.getElementById("original").value = original;
+            document.getElementById("sharedLink").value = sharedLink;
+            document.getElementById("compressedLink").src = compressed;
+            document.getElementById("compressedName").innerText = name;
+
+            document.getElementById("sharedLinkhidden").value = sharedCode;
+            document.getElementById("Idhidden").value = id;
+            document.getElementById("new-title").value = name;
+            document.getElementById("imageNameDelete").innerText = name;
+            for (var i = 0; i < count; i++) {
+                var ID = "IMD" + i;
+                $("#"+ID).removeClass("active-image");
+            }
+            $("#"+image_id).addClass("active-image");
+            SharedCode = sharedCode;
+            CurrentID = id;
+            document.getElementById("RenameButton").disabled = false;
+            document.getElementById("DeleteButton").disabled = false;
+            document.getElementById("OpenButton").disabled = false;
+            document.getElementById("MoveButton").disabled = false;
+            document.getElementById("ManageAccessButton").disabled = false;
+            document.getElementById("MakePublicButton").disabled = false;
+            document.getElementById("sharedLink").disabled = false;
+            var public_private = '@Resources.Resource.MAKE_PRIVATE';
+            if(isPublic=="False"){
+                public_private = '@Resources.Resource.MAKE_PUBLIC';
+                $('#toggle_event_editing button').eq(0).removeClass('unlocked_inactive btn-default');
+                $('#toggle_event_editing button').eq(0).addClass('locked_active btn-info');
+                $('#toggle_event_editing button').eq(1).removeClass('locked_active btn-info');
+                $('#toggle_event_editing button').eq(1).addClass('unlocked_inactive btn-default');
+
+            }
+            else{
+                public_private = '@Resources.Resource.MAKE_PRIVATE';
+                $('#toggle_event_editing button').eq(1).removeClass('unlocked_inactive btn-default');
+                $('#toggle_event_editing button').eq(1).addClass('locked_active btn-info');
+                $('#toggle_event_editing button').eq(0).removeClass('locked_active btn-info');
+                $('#toggle_event_editing button').eq(0).addClass('unlocked_inactive btn-default');
+            }
+
+            document.getElementById("MakePublicButton").innerText = public_private;
+
+
+            return false;
+        }
+
+        (function ($) {
+
+            $('#filter').keyup(function () {
+                var val = $(this).val();
+                var rex = new RegExp($(this).val(), 'i');
+                $('.searchable div.list-group-item').hide();
+                $('.searchable div.list-group-item').filter(function () {
+                    var data = this.title;
+                    var result = rex.test(data);
+                    return result;
+                }).show();
+            })
+
+        }(jQuery));
+
+        function ShowProgress() {
+            setTimeout(function () {
+                var a = $('#loadingAnimation');
+                a.css('visibility', 'visible');
+            }, 200);
+        }
+
+        function openImage(path,base) {
+            location.href = base + path;
+            return false;
+        }
+
+        var emailError = 1;
+        function CheckEmail(email) {
+            var changedText = $(email).val();
+            var respond = emailValidation(changedText);
+            setClasses('#userMail', respond, 'email');
+        }
+        function setClasses(id, respond, type) {
+            if (respond == false) {
+                if (type == 'email') emailError = 1;
+                else passError = 1;
+                $(id).removeClass('field-success');
+                $(id).addClass('field-error');
+                $("#sizing-addon2").disabled = true;
+            }
+            else {
+                if (type == 'pass') emailError = 0;
+                else passError = 0;
+                $(id).removeClass('field-error');
+                $(id).addClass('field-success');
+                $("#sizing-addon2").disabled = false;
+            }
+        }
+    </script>
 }
 
-<div class="row" style="margin-bottom: -20px; overflow: hidden; position: relative; min-height: 600px">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <h2>Images</h2>
-        <div class="col-md-12 text-left">
-            <div class="row">
-                <ul class="vert_menu">
-                    <li><a href="/Home/Library" class="current">User</a></li>
-                    <li><a href="/Home/Images" class="current">Shared folder</a></li>
-                </ul>
+<div class="modal fade" id="RenameImage" tabindex="-1" role="dialog" style="top:200px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.RENAME</h4>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 text-center" style="margin-top: -50px">
-                    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        <input id="fileInput" style="visibility: collapse" type="file" name="file" onchange="document.getElementById('fileSubmit').click();" />
-                        <input id="fileSubmit" style="visibility: collapse" type="submit" value="bla" />
-                        <input type="button" class="btn btn-primary btn-lg center-block" style="width: 128px; height: 128px;" value="Upload" onclick="document.getElementById('fileInput').click();" />
-                    }
-            </div>
-            @foreach (var i in ViewBag.Images)
-            {
-                string original = @i.sharedCode;
-                string commpressed = ViewBag.BASE_URL + @i.sharedCode + "_compressed.png";
-                string name = @i.name + ".png";
-                <a href="/Home/SingleImage?image=@original">
-                    <div class="col-md-2 text-center" style="margin-bottom: 60px">
-                        <img src="@commpressed" alt="@commpressed" style="width: 128px; height: 128px"/>
-                        <label class="text-center">@name</label>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="new-title" class="control-label">@Resources.Resource.RENAME_TITLE_IMAGE</label>
+                        <input type="text" class="form-control" id="new-title" data-toggle="tooltip" data-placement="top" title="@Resources.Resource.MAX_NAME_LENGTH">
                     </div>
-                </a>
-            }
-        </div>
-    </div>
-    <div class="col-md-2" style="background-color: #686868; right: 10px; height: 100%; position: absolute">
-        <div style="margin-left: 10px">
-            <img src="@CommpressedLink" style="margin: 5px;"/>
-            <p style="color: #E0E0E0">@Name</p>
-            <hr/>
-            <div>
-                <button type="button" class="btn btn-default" style="width: 100%">Open</button>
+                </form>
             </div>
-            <br/>
-            <div>
-                <button type="button" class="btn btn-default" style="width: 100%">Rename</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal">@Resources.Resource.CLOSE</button>
+                <button type="button" class="btn btn-primary btn-not-rounded" 
+                         onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                url: '@Url.Action("RenameImageOutside","Home")',
+                                data: {
+                                    path: document.getElementById('original').value,
+                                    newName:document.getElementById('new-title').value
+                                },
+                                success: function (data) {
+                                    $('#dynamicImagesArea').html(data);
+                                    $('#RenameImage').modal('hide');
+                                    if(document.getElementById('MessageContentFromPartialChangeState').value!='')
+                                    {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartialChangeState').value;
+                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                                    }    
+                                }
+                            });">
+                @Resources.Resource.SUBMIT</button>
             </div>
-            <br/>
-            <div>
-                <button type="button" class="btn btn-danger" style="width: 100%">Delete</button>
-            </div>
-            <br/>
-            <div>
-                <button class="btn btn-warning" style="width: 100%">Make public</button>
-            </div>
-            <hr/>
-            <p style="color: #E0E0E0">Share image</p>
-            <input class="form-control" style="width: 100%" type="text" placeholder="Sharing link" value="@ShareLink"/>
-            <hr/>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="DeleteImage" tabindex="-1" role="dialog" style="top:200px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close  btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.DELETE_IMAGE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <label class="control-label text-center">@Resources.Resource.SAVE_CHANGES</label>
+                    </div>
+                    <div class="row">
+                        <p class="control-label">@Resources.Resource.WANT_DELETE <b id="imageNameDelete"></b> @Resources.Resource.IMAGEY?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal">@Resources.Resource.NO</button>
+                <button type="button" class="btn btn-danger btn-not-rounded"
+                         onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                url: '@Url.Action("DeleteImage","Home")',
+                                data: {
+                                    path: document.getElementById('original').value
+                                },
+                                success: function (data) {
+                                    $('#dynamicImagesArea').html(data);
+                                    $('#DeleteImage').modal('hide');
+                                    if(document.getElementById('MessageContentFromPartialChangeState').value!='')
+                                    {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartialChangeState').value;
+                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                                    }                                        
+                                }
+                            });">
+                    @Resources.Resource.YES
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MoveImage" tabindex="-1" role="dialog" style="top:80px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="max-width:500px;">
+                <div class="modal-header">
+                    <button type="button" class="close  btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.MOVE_IMAGE</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input type="text" id="filter" class="form-control" placeholder="@Resources.Resource.SEARCH_FOR">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-sm-12">
+                                <div class="list-group searchable" style="height:auto;height:200px;overflow:auto;border:solid 1px #E0E0E0" id="areaForFolders">                                                                    
+                                    @if (ViewBag.UserFolders != null && ViewBag.UserFolders.Count > 0)
+                                    {
+                                        for (int i = 0; i < ViewBag.UserFolders.Count; i++)
+                                        {
+                                            string folderTitle = ViewBag.UserFolders[i].Name;
+                                        <div class="list-group-item" title="@folderTitle">
+                                            <div class="media-body" style="vertical-align:middle">
+                                                <h5 class="media-heading text-overflowed text-overflowed_300">@folderTitle</h5>
+                                            </div>
+                                            <div class="media-right" style="vertical-align:middle;">
+                                                <button type="button" class="btn right btn-primary btn-not-rounded" aria-label="Left Align" onclick=
+                                                        "location.href='@Url.Action("MoveItMoveIt","Home",new {folderId=ViewBag.UserFolders[i].Id})&imageSharedCode='+document.getElementById('original').value">
+                                                    @Resources.Resource.MOVE_HERE
+                                                </button>
+                                            </div>
+                                        </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="newFolderName" placeholder="Enter new folder's title" value="@Resources.Resource.NEW_FOLDER">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" aria-label="Left Align" onclick=
+                                    "$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                        url: '@Url.Action("ImagesMoveCreateFolder","Home")',
+                                        data: {
+                                            name: document.getElementById('newFolderName').value,
+                                            folderId: @ViewBag.FolderId
+                                        },
+                                        success: function (data) {
+                                            $('#areaForFolders').html(data);
+                                            document.getElementById('newFolderName').value='@Resources.Resource.NEW_FOLDER';
+                                            document.getElementById('areaForFolders').scrollTop = 9999;
+                                        }
+                                    });">
+                                            @Resources.Resource.CREATE
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal" style="width:85px;">
+                        @Resources.Resource.CLOSE
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ImageManageAccess">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="ImagesAccessDynamic">           
+        </div>
+    </div>
+</div>
+
+<div class="row main" id="main" style="margin-bottom: -20px; overflow: hidden; position: relative; min-height: 100%">
+    <div class="col-md-12" style="margin-right:0px;padding-top:0px;">
+            <div class="row" id="titleRow">
+                <div class="col-sm-6 header-images" >
+                    <h2 class="text-overflowed text-overflowed_title">@ViewBag.FolderName</h2>
+                </div>
+                <div class="preloader" id="loadingAnimation"  style="visibility:collapse">
+                    <div class="sk-cube-grid preloader-center center-block">
+                        <div class="sk-cube sk-cube1"></div>
+                        <div class="sk-cube sk-cube2"></div>
+                        <div class="sk-cube sk-cube3"></div>
+                        <div class="sk-cube sk-cube4"></div>
+                        <div class="sk-cube sk-cube5"></div>
+                        <div class="sk-cube sk-cube6"></div>
+                        <div class="sk-cube sk-cube7"></div>
+                        <div class="sk-cube sk-cube8"></div>
+                        <div class="sk-cube sk-cube9"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 button-area">
+                    <button id="openSideMenu" type="button" style="background-color:white" class="btn btn-default pull-right btn-not-rounded open-button-open open-side-button-images" aria-label="Left Align" onclick="openNav()">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </button>
+                        <div class="pull-right" style="display:inline;height:44px;">
+                            @using (Html.BeginForm("Images", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                            <input id="fileInput" style="visibility: collapse; display: none" type="file" name="file" filter="image/*" onchange="document.getElementById('fileSubmit').click();" />
+                            <input id="fileSubmit" style="visibility: collapse; display: none" type="submit" value="" onclick="$('#loadingAnimation').css('visibility', 'visible');" />
+                            <input id="fake" style="visibility: collapse; display: none" type="text" name="folderId" value="@ViewBag.FolderId" />
+                            <span class="icon-input-btn" id="UploadImage">
+                                <button type="button" value="" id="UploadImageButton" data-placement="bottom" title="@Resources.Resource.UPLOAD_NEW_IMAGE" 
+                                 class="btn btn-primary btn-lg pull-right success btn-not-rounded"
+                                 onclick="document.getElementById('fileInput').click();">
+                                    <span class="glyphicon glyphicon-open" style="margin-left: -5px"></span>
+                                </button>
+                            </span>
+                            } 
+                        </div>
+                </div>
+            </div>
+        <div class="row navigation-open" id="navigation">
+            <ol class="breadcrumb">
+                <li class="text-overflowed text-overflowed text-overflowed_300"><a href="/Home/Library">@Resources.Resource.FOLDERS</a></li>
+                <li class="active text-overflowed text-overflowed_title">@ViewBag.FolderName</li>
+            </ol>
+        </div>
+        <div class="row" id="dynamicImagesArea">
+            <div class="col-sm-12 main-area-open" id="parent-container-img">
+                @{
+                    int index = 0;
+                    int count = ViewBag.Images.Count;
+                    foreach (var i in ViewBag.Images)
+                    {
+                        string original = i.SharedCode;
+                        string compressed = ViewBag.ImageLinkBASE + (i.ServerFolder == null ? "" : i.ServerFolder.SharedCode) + "/" + i.SharedCode + "_compressed.png";
+                        string sharedLink = ViewBag.SharedImageBASE + original;
+                        string privatePublicPath = ViewBag.BASE_URL + "Resources/";
+                        string isPublic = i.IsPublic + "";
+                        if(i.IsPublic)
+                        {
+                            privatePublicPath += "public";
+                        }
+                        else
+                        {
+                            privatePublicPath += "private";
+                        }
+                        privatePublicPath += "_front.png";
+                        string classes = "floating-box text-center task active images ";
+                        string name = i.Name;
+                        if (index == 0)
+                        {
+                            <script>
+                                document.getElementById("original").value = original;
+                                document.getElementById("sharedLinkhidden").value = @i.SharedCode;
+                                document.getElementById("Idhidden").value = @i.Id;
+                                document.getElementById("new-title").value = name;
+                                document.getElementById("compressedName").innerText = name;
+                            </script>
+                        }
+                        if(index%2==0)
+                        {
+                            classes += "image-preview image-preview-odd";
+                        }
+                        else
+                        {
+                            classes += "image-preview image-preview-even";
+                        }
+                        string image_id = "IMD" + index;
+
+                        <div onclick="selectImage('@i.Id','@image_id','@count','@i.SharedCode','@original', '@sharedLink', '@compressed','@name.Replace("'", "&#039")','@isPublic')"
+                              ondblclick="openImage('@original','@ViewBag.SigleImageBASE')" style="cursor:pointer;">
+                            <div class="@classes" id="@image_id" style="padding-top: 10px;">
+                                <div style="width: 128px; height: 128px;background:url(@compressed) no-repeat center center; z-index:1;padding-top:10px;" class="center-block">
+                                    <div class="front-image"  style="background:url(@privatePublicPath) no-repeat center center;z-index:2; ">
+                                    </div>
+                                </div>
+                                <label class="text-center text-overflowed text-overflowed_160">@name</label>
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="sidenav" id="mySidenav">
+        <div style="margin-left: 10px; margin-right: 10px; height: 100%;">
+            <div style="width:100%;height:135px;">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="font-size:40px;">×</a>
+                <input type="text" class="hidden" id="original" value="@ViewBag.FirstImageShCode" />
+                <img src="@ViewBag.FirstImageSrc" id="compressedLink" alt="Image is not found or not selected" style="max-width:145px;max-height:128px;margin-top:10px;" />
+                <br/><label id="compressedName" class="text-overflowed text-overflowed_160 p-color" style="min-width:50px;">@ViewBag.FirstImageName</label>
+            </div>
+            <hr style="margin-top:25px;"/>
+            <div>
+                <button type="button" class="btn btn-default btn-not-rounded" style="width: 100%" disabled id="OpenButton" onclick="openImage(document.getElementById('original').value,'@ViewBag.SigleImageBASE')">@Resources.Resource.OPEN</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" class="btn btn-default btn-not-rounded" data-toggle="modal" disabled id="MoveButton" data-target="#MoveImage" style="width: 100%">@Resources.Resource.MOVE</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" class="btn btn-default btn-not-rounded" data-toggle="modal" disabled id="RenameButton" data-target="#RenameImage" style="width: 100%">@Resources.Resource.RENAME</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" class="btn btn-danger btn-not-rounded" data-toggle="modal" disabled id="DeleteButton" data-target="#DeleteImage" style="width: 100%">@Resources.Resource.DELETE</button>
+            </div>
+            <br />
+            <div>
+                <button class="btn btn-warning btn-not-rounded" disabled id="MakePublicButton"  style="width: 100%" 
+                         onclick="$('#loadingAnimation').css('visibility', 'visible');
+                         $.ajax({
+                            url:'@Url.Action("MakeImagePublicOrPrivate","Home")',
+                                data: {
+                                    imageId: document.getElementById('Idhidden').value
+                                },
+                                success: function (data) {
+                                    $('#dynamicImagesArea').html(data);
+                                    if(document.getElementById('MessageContentFromPartialChangeState').value!='')
+                                    {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartialChangeState').value;
+                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                                    }
+                                }
+                            });"
+                        >@Resources.Resource.MAKE_PUBLIC</button>
+            </div>
+            <hr />
+            <p style="color: #E0E0E0">@Resources.Resource.SHARE_LINK</p>
+            <input class="form-control btn-not-rounded" id="sharedLink" style="width: 100%" type="text" placeholder="Sharing link" disabled  onclick="selectText();" value="@ViewBag.FirstImageShLink" readonly />
+            <br />
+            <div>
+                <button type="button" class="btn btn-success btn-not-rounded" data-toggle="modal" data-target="#ImageManageAccess" disabled id="ManageAccessButton" style="width: 100%" onclick=
+                        "$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                        url: '@Url.Action("PartialImagesAccess","Home")',
+                        data: {
+                            imageId: document.getElementById('Idhidden').value,                       
+                        },
+                        success: function (data) {        
+                            $('#ImagesAccessDynamic').html(data);         
+                            if(document.getElementById('MessageContentFromPartial').value!='')
+                            {
+                                $('#Message').modal('show');
+                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                            }
+                        }
+                    }); 
+                        "
+                         >@Resources.Resource.MANAGE_ACCESS</button>
+            </div>
+            <p id="sharedLinkhidden" class="hidden-field" readonly="readonly">@ViewBag.FirstImageShCode</p>
+            <p id="Idhidden" class="hidden-field">@ViewBag.FirstImageId</p>
+        </div>
+    </div>
+</div>
+
+<nav id="context-menu" class="context-menu">
+    <ul class="context-menu__items">
+        <li class="context-menu__item">
+            <a href="#" class="context-menu__link" onclick="$('#OpenButton').click()"> @Resources.Resource.OPEN</a>
+        </li>
+        <li class="context-menu__item">
+            <a href="#" class="context-menu__link" data-target="#MoveImage" data-toggle="modal"> @Resources.Resource.MOVE</a>
+        </li>
+        <li class="context-menu__item">
+            <a href="#" class="context-menu__link" data-target="#DeleteImage" data-toggle="modal"> @Resources.Resource.DELETE</a>
+        </li>
+        <li class="context-menu__item">
+            <a href="#" class="context-menu__link" data-target="#RenameImage" data-toggle="modal"> @Resources.Resource.RENAME</a>
+        </li>
+        <li class="context-menu__item">
+            <div class="row" style="padding: 4px 12px;">
+                <div class="col-md-3">
+                    <h5 class="context-menu-private">@Resources.Resource.PRIVATE</h5>
+                </div>
+                <div class="col-md-9">
+                    <div class="btn-group pull-right" id="toggle_event_editing">
+                        <button type="button" class="btn btn-default unlocked_inactive btn-not-rounded" style="height:30px;width:50px;font-size:12px;">@Resources.Resource.ON</button>
+                        <button type="button" class="btn btn-info locked_active btn-not-rounded" style="height:30px;width:50px;font-size:12px;">@Resources.Resource.OFF</button>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="context-menu__item">
+            <a class="context-menu__link" data-toggle="modal" data-target="#ImageManageAccess" onclick=
+                        "$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                        url: '@Url.Action("PartialImagesAccess","Home")',
+                        data: {
+                            imageId: document.getElementById('Idhidden').value,                       
+                        },
+                        success: function (data) {        
+                            $('#ImagesAccessDynamic').html(data);         
+                            if(document.getElementById('MessageContentFromPartial').value!='')
+                            {
+                                $('#Message').modal('show');
+                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';                                                                                      
+                            }
+                        }
+                    }); 
+                        ">@Resources.Resource.MANAGE_ACCESS</a>
+        </li>
+    </ul>
+</nav>
+<div class="modal fade" id="RenameImage" tabindex="-1" role="dialog" style="top:200px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.RENAME</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="new-title" class="control-label">@Resources.Resource.RENAME_TITLE_IMAGE</label>
+                        <input type="text" class="form-control" id="new-title" data-toggle="tooltip" data-placement="top" title="@Resources.Resource.MAX_NAME_LENGTH">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal">@Resources.Resource.CLOSE</button>
+                <button type="button" class="btn btn-primary btn-not-rounded"
+                        onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                url: '@Url.Action("RenameImageOutside","Home")',
+                                data: {
+                                    path: document.getElementById('original').value,
+                                    newName:document.getElementById('new-title').value
+                                },
+                                success: function (data) {
+                                    $('#dynamicImagesArea').html(data);
+                                    $('#RenameImage').modal('hide');
+                                    if(document.getElementById('MessageContentFromPartialChangeState').value!='')
+                                    {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartialChangeState').value;
+                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                    }
+                                }
+                            });">
+                    @Resources.Resource.SUBMIT
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DeleteImage" tabindex="-1" role="dialog" style="top:200px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close  btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.DELETE_IMAGE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <label class="control-label text-center">@Resources.Resource.SAVE_CHANGES</label>
+                    </div>
+                    <div class="row">
+                        <p class="control-label">@Resources.Resource.WANT_DELETE <b id="imageNameDelete"></b> @Resources.Resource.IMAGEY?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal">@Resources.Resource.NO</button>
+                <button type="button" class="btn btn-danger btn-not-rounded"
+                        onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                url: '@Url.Action("DeleteImage","Home")',
+                                data: {
+                                    path: document.getElementById('original').value
+                                },
+                                success: function (data) {
+                                    $('#dynamicImagesArea').html(data);
+                                    $('#DeleteImage').modal('hide');
+                                    if(document.getElementById('MessageContentFromPartialChangeState').value!='')
+                                    {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartialChangeState').value;
+                                        document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                    }
+                                }
+                            });">
+                    @Resources.Resource.YES
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="MoveImage" tabindex="-1" role="dialog" style="top:150px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:500px;">
+            <div class="modal-header">
+                <button type="button" class="close  btn-not-rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">@Resources.Resource.MOVE_IMAGE</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" id="filter" class="form-control" placeholder="@Resources.Resource.SEARCH_FOR">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-12">
+                            <div class="list-group searchable" style="height:auto;height:200px;overflow:auto;border:solid 1px #E0E0E0" id="areaForFolders">
+                                @if (ViewBag.UserFolders != null && ViewBag.UserFolders.Count > 0)
+                                {
+                                    for (int i = 0; i < ViewBag.UserFolders.Count; i++)
+                                    {
+                                        string folderTitle = ViewBag.UserFolders[i].Name;
+                                        <div class="list-group-item" title="@folderTitle">
+                                            <div class="media-body" style="vertical-align:middle">
+                                                <h5 class="media-heading text-overflowed text-overflowed_300">@folderTitle</h5>
+                                            </div>
+                                            <div class="media-right" style="vertical-align:middle;">
+                                                <button type="button" class="btn right btn-primary btn-not-rounded" aria-label="Left Align" onclick="location.href='@Url.Action("MoveItMoveIt","Home",new {folderId=ViewBag.UserFolders[i].Id})&imageSharedCode='+document.getElementById('original').value">
+                                                    Move here
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="newFolderName" placeholder="Enter new folder's title" value="@Resources.Resource.NEW_FOLDER">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                        url: '@Url.Action("ImagesMoveCreateFolder","Home")',
+                                        data: {
+                                            name: document.getElementById('newFolderName').value,
+                                            folderId: @ViewBag.FolderId
+                                        },
+                                        success: function (data) {
+                                            $('#areaForFolders').html(data);
+                                            document.getElementById('newFolderName').value='@Resources.Resource.NEW_FOLDER';
+                                            document.getElementById('areaForFolders').scrollTop = 9999;
+                                        }
+                                    });">
+                                        @Resources.Resource.CREATE
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-not-rounded" data-dismiss="modal" style="width:85px;">
+                    @Resources.Resource.CLOSE
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ImageManageAccess">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="ImagesAccessDynamic">
+        </div>
+    </div>
+</div>
+
+    <script src="~/Scripts/context-menu.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+

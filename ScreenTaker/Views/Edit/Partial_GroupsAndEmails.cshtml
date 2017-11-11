@@ -1,0 +1,182 @@
+﻿@{
+    if (!Request.QueryString["lang"].IsEmpty())
+    {
+        Culture = UICulture = Request.QueryString["lang"];
+    }
+    else
+    {
+        Culture = UICulture = ViewBag.Localize ?? "en";
+    }
+}
+
+<div class="row-fluid">
+    <div class="col-sm-4" style="padding:5px;">
+        <div class="row" style="margin-bottom:10px;">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Group name" aria-describedby="sizing-addon2" id="GroupNameInput">
+                    <span class="input-group-addon btn btn-default" aria-label="Left Align" id="sizing-addon2"
+                          onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                url: 'CreateGroup',
+                                data: {
+                                    name: document.getElementById('GroupNameInput').value,
+                                },
+                                success: function (data) {
+                                    $('#dynamicArea').html(data);
+                                    if (document.getElementById('MessageContentFromPartial').value != '') {
+                                        $('#Message').modal('show');
+                                        document.getElementById('MessageContent').innerHTML = document.getElementById('MessageContentFromPartial').value;
+                                        document.getElementById('MessageTitle').innerHTML = '@Resources.Resource.ERR_TITLE';
+                                    }
+                                }
+                            });">+</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="list-group ug-list">
+                    @if (ViewBag.Groups != null)
+                    {
+                        for (int i = 0; i < ViewBag.Groups.Count; i++)
+                        {
+                            string itemClass = "list-group-item";
+                            if (ViewBag.Groups[i].Id == ViewBag.selectedId)
+                            {
+                                itemClass += " active";
+                            }
+                            <div class="@itemClass"
+                                 onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                            url: 'Partial_GroupsAndEmails',
+                            data: {
+                            selectedId: @ViewBag.Groups[i].Id,
+                            },
+                            success: function (data) {
+                                $('#dynamicArea').html(data);
+                                if(document.getElementById('MessageContentFromPartial').value!='')
+                                            {
+                                                $('#Message').modal('show');
+                                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                            }
+
+                            }});">
+                                <div class="media-left" style="vertical-align:middle;"
+                                     onclick="$('#loadingAnimation').css('visibility', 'visible');if(event.stopPropagation){event.stopPropagation();}event.cancelBubble=true;
+                                        $.ajax({
+                                            url: 'RemoveGroup',
+                                            data: {
+                                                selectedId: @ViewBag.Groups[i].Id,
+                                            },
+                                            success: function (data) {
+                                                $('#dynamicArea').html(data);
+                                                 if(document.getElementById('MessageContentFromPartial').value!='')
+                                            {
+                                                $('#Message').modal('show');
+                                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                            }
+                                            }
+                                        });">
+                                    <button type="button" class="btn badge right" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-remove glyphicon-th-large" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="media-left" style="vertical-align:middle;">
+                                    <button type="button" class="btn badge right" aria-label="Left Align">
+                                        <span aria-hidden="true">@ViewBag.GroupMemberCounts[i]</span>
+                                    </button>
+                                </div>
+                                <div class="media-left" style="vertical-align:middle">
+                                    <h5 class="media-heading text-overflowed text-overflowed_160" style="color: #444444">@ViewBag.Groups[i].Name</h5>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-8" style="padding:5px;">
+        <div class="row" style="margin-bottom:10px;">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" id="AddUserInput" data-autocomplete-source="@Url.Action("AutocompleteSearchEmails", "Edit")" 
+            onkeyup="CheckEmail(this)" onblur="CheckEmail(this)" onfocus="CheckEmail(this)" onchange="CheckEmail(this)" onmouseover="CheckEmail(this)">
+                    <span class="input-group-addon btn btn-default" aria-label="Left Align" id="sizing-addon2"
+                          onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                        url: 'AddUser',
+                                        data: {
+                                            selectedId: @ViewBag.SelectedId,
+                                            email: document.getElementById('AddUserInput').value,
+                                        },
+                                        success: function (data) {
+                                            $('#dynamicArea').html(data);
+                                            if(document.getElementById('MessageContentFromPartial').value!='')
+                                            {
+                                                $('#Message').modal('show');
+                                                document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                            }
+                                        }
+                                    });">+</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="list-group respo ug-list">
+                    @if (ViewBag.Emails != null)
+                    {
+                        for (int i = 0; i < ViewBag.Emails.Count; i++)
+                        {
+                            <div class="list-group-item">
+                                <div class="media-left" style="vertical-align:middle"
+                                     onclick="$('#loadingAnimation').css('visibility', 'visible');$.ajax({
+                                            url: 'RemoveUser',
+                                            data: {
+                                                selectedId: @ViewBag.SelectedId,
+                                                email: '@ViewBag.Emails[i]',
+                                            },
+                                            success: function (data) {
+                                                $('#dynamicArea').html(data);
+                                                 if(document.getElementById('MessageContentFromPartial').value!='')
+                                                {
+                                                    $('#Message').modal('show');
+                                                    document.getElementById('MessageContent').innerHTML=document.getElementById('MessageContentFromPartial').value;
+                                                    document.getElementById('MessageTitle').innerHTML='@Resources.Resource.ERR_TITLE';
+                                                }
+                                            }
+                                        });">
+                                    <button type="button" class="btn badge right" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-remove glyphicon-th-large" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="media-left">
+                                    <div style="background: url(@ViewBag.Avatars[i]) no-repeat center center; height: 50px; width: 50px;"
+                                         class="media-object img-circle zoom_img">
+                                    </div>
+                                </div>
+                                <div class="media-left" style="vertical-align: middle">
+                                    <h4 class="media-heading text-overflowed text-overflowed_160" style="color: #444444">@ViewBag.Emails[i]</h4>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Site.js"></script>
+
+@if (ViewBag.MessageContent != null)
+{
+    <input type="hidden" id="MessageContentFromPartial" value="@ViewBag.MessageContent" />
+}
+else
+{
+    <input type="hidden" id="MessageContentFromPartial" value="" />
+}

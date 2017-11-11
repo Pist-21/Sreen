@@ -1,0 +1,130 @@
+﻿@using ScreenTaker.Models;
+@{
+    ViewBag.Title = Resources.Resource.SHARED_FOLDERS;
+    ViewBag.CurrentFolderShCode = "-1";
+    ViewBag.CurrentFolderId = "-1";
+    if (!Request.QueryString["lang"].IsEmpty())
+    {
+        Culture = UICulture = Request.QueryString["lang"];
+    }
+    else
+    {
+        Culture = UICulture = ViewBag.Localize ?? "en";
+    }
+}
+@section Scripts {
+    <script>
+    $('[data-toggle="popover"]').popover()
+    var a = $('#loadingAnimation');
+    a.css('visibility', 'hidden');
+    $(document).ajaxStart(function () {
+        $('#loadingAnimation').css('visibility', 'visible');
+    });
+    $(document).ajaxStop(function () {
+        a.css('visibility', 'hidden');
+    });
+
+    function ShowProgress() {
+        setTimeout(function () {
+            var a = $('#loadingAnimation');
+            a.css('visibility', 'visible');
+        }, 200);
+    }
+    $('form').live("submit", function () {
+        ShowProgress();
+    });
+
+    function openFolder(i, base) {
+        location.href = base + i;
+        return false;
+    }
+
+    function selectFolder(folder_id, count,sharedCode) {
+        for (var i = 0; i < count; i++) {
+            var ID = "FID" + i;
+            $("#"+ID).removeClass("active-image");
+        }
+        $("#"+folder_id).addClass("active-image");
+        document.getElementById('choosenID').value = sharedCode;
+        return false;
+    }
+    </script>
+}
+<div id="main" style="min-height: 100%">
+    <div class="col-md-12">
+        <div class="col-sm-12 header-shared-library">
+            <h2 class="text-overflowed text-overflowed_title">@Resources.Resource.SHARED_FOLDERS</h2>
+            <input id="choosenID" class="hidden-field" value="img"/>
+        </div>
+        <div class="row" id="dynamicSharedFoldersArea">
+            <div class="col-sm-12" id="shared-parent-container">
+                @{
+                    int count = ViewBag.Folders.Count;
+
+                    for (int i = 0; i < ViewBag.Folders.Count; i++)
+                    {
+                        string classes = "floating-box text-center task active images folder";
+                        string folder_id = "FID" + i;
+                        string sharedLink = ViewBag.FolderLinkBASE + ViewBag.Folders[i].SharedCode;
+                        string sharedCode = ViewBag.Folders[i].SharedCode;
+                        string FolderTitle = ViewBag.Folders[i].Name;
+                        string isPublic = ViewBag.Folders[i].IsPublic + "";
+                        string imageLink = ViewBag.BASE_URL + "Resources/" + (ViewBag.Folders[i].IsPublic ? "public" : "private");
+                        if (i % 2 == 0)
+                        {
+                            classes += "folder-preview shared-folder-preview-odd";
+                        }
+                        else
+                        {
+                            classes += "folder-preview shared-folder-preview-even";
+                        }
+                        if (i > 0)
+                        {
+                            imageLink += "_shared.png";
+                            string AvatarPath = ViewBag.UserAvatarBASE + (ViewBag.Owners[i] != null && ViewBag.Owners[i].AvatarFile != null&& System.IO.File.Exists(Server.MapPath("/avatars/")+ ViewBag.Owners[i].AvatarFile+"_50.png") ? (ViewBag.Owners[i].AvatarFile + "_50.png") : "user_50.png");
+                            string OwnerEmail = ViewBag.Owners[i].Email;
+                            string image = "<img class=\"pull - left\" src=\"" + AvatarPath + "\" class=\"img-circle\" style=\"width:50px;height:50px;margin:5px;margin-left:-10px;border-radius:30px;\"/>";
+                            string popover_template =
+                            "<div class='popover' role='tooltip' style=\"width:200px;height:80px;z-index:30000;margin-top:10px;\"><div class='arrow'></div><h3 class='popover-title' style=\"font-size:10px;height:20px;font-weight:bold;vertical-align:top;margin:0px;padding:0px;\"></h3><div><div class=\"container-fluid\"><div class=\"row\"><div class=\"col-xs-5\">" + image + "</div> <div class=\"col-xs-7\"><a class=\"pull-left popover-content\" style=\"vertical-align:middle;margin-left:-55px;margin-top:10px; max-width: 150px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;\"></a></div></div></div></div></div>";
+
+                            <button type="button" class="transparent-btn task" 
+                                    data-toggle="popover" data-trigger="hover" data-placement="top" title="@Resources.Resource.OWNER" 
+                                    data-template="@popover_template" data-content="@OwnerEmail"
+                                    ondblclick="openFolder('@ViewBag.Folders[i].SharedCode','@ViewBag.FolderLinkBASE')" style="cursor:pointer;"
+                                    onclick="selectFolder('@folder_id','@count','@ViewBag.Folders[i].SharedCode')">
+                                <figure class="@classes" id="@folder_id">
+                                    <img src="@imageLink" class="image"  id="img_id" style="width: 128px; height: 128px;" />
+                                    <figcaption class="text-center text-overflowed text-overflowed_160">@FolderTitle</figcaption>
+                                </figure>
+                            </button>
+                        }
+                        else
+                        {
+                            imageLink += ".png";
+                            <button onclick="selectFolder('@folder_id','@count','@ViewBag.Folders[i].SharedCode')" type="button" class="transparent-btn task" 
+                                 ondblclick="openFolder('@ViewBag.Folders[i].SharedCode','@ViewBag.FolderLinkBASE')" style="cursor:pointer;">
+                                <figure class="@classes" id="@folder_id">
+                                    <img src="@imageLink" class="image" id="img_id" style="width: 128px; height: 128px;" />
+                                    <figcaption class="text-center text-overflowed text-overflowed_160">@FolderTitle</figcaption>
+                                </figure>
+                            </button>
+                        }
+                    }
+                    <script>
+                        $("#FID0").onclick();
+                    </script>
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+<nav id="context-menu" class="context-menu">
+    <ul class="context-menu__items">
+        <li class="context-menu__item">
+            <a href="" class="context-menu__link" id="ContextOpenButton" onclick="openFolder(document.getElementById('choosenID').value, '@ViewBag.FolderLinkBASE')"> @Resources.Resource.OPEN</a>
+        </li>
+    </ul>
+</nav>
+<script src="~/Scripts/context-menu.js"></script>
+<script src="~/Scripts/Site.js"></script>
