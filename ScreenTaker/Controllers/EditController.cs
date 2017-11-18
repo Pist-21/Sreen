@@ -1,28 +1,10 @@
-<<<<<<< HEAD
-﻿using System;
-=======
 ﻿
 using ScreenTaker.Models;
 using System;
->>>>>>> hotfix
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-<<<<<<< HEAD
-
-namespace ScreenTaker.Controllers
-{
-    public class EditController : Controller
-    {
-        // GET: Edit
-        public ActionResult UserGroups()
-        {
-            return View();
-        }
-    }
-}
-=======
 using System.Globalization;
 using System.Threading;
 using Microsoft.AspNet.Identity;
@@ -76,11 +58,11 @@ namespace ScreenTaker.Controllers
                         var baseUrl = GetBaseUrl();                        
                         IList<string> avatars = new List<string>();
                         foreach (var e in emails)
-                        {
-                            if (e.AvatarFile != null && System.IO.File.Exists(getUserAvatar(e.AvatarFile + "_50")))
-                                avatars.Add(getUserAvatar(e.AvatarFile+"_50"));
-                            else
+                        {                          
+                            if (e.AvatarFile == null || !System.IO.File.Exists(Server.MapPath("/avatars/") + e.AvatarFile + "_50.png"))
                                 avatars.Add(getUserAvatar("user_50"));
+                            else
+                                avatars.Add(getUserAvatar(e.AvatarFile + "_50"));
                         }
                         ViewBag.Avatars = avatars;
                     }                                                  
@@ -347,4 +329,3 @@ namespace ScreenTaker.Controllers
         }
     }
 }
->>>>>>> hotfix

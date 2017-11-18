@@ -7,17 +7,12 @@ using System.Web.Mvc;
 using ScreenTaker.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
-<<<<<<< HEAD
-using ScreenTaker.Data.DAL;
-using Image = ScreenTaker.Data.DAL.Image;
-=======
 using System.Net.Mail;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Image = ScreenTaker.Models.Image;
 using System.Globalization;
 using System.Threading;
->>>>>>> hotfix
 
 namespace ScreenTaker.Controllers
 {
@@ -100,34 +95,21 @@ namespace ScreenTaker.Controllers
                             last.Count += 2;
                         }
                         var image = new Image();
-<<<<<<< HEAD
-                        //if (_entities.Image.ToList().Count > 0)
-                        //    image.id = _entities.Image.Max(s => s.id) + 1;
-                        //else image.id = 1;
-                        image.isPublic = false;
-                        image.folderId = _entities.Folders.Where(f=>f.name.Equals("General")).Select(fol=>fol.id).FirstOrDefault();
-                        image.sharedCode = sharedCode;
-                        image.name = fileName;
-                        image.publicationDate = DateTime.Now;
-=======
                         image.IsPublic = false;
                         image.FolderId = folder.Id;
                         image.SharedCode = sharedCode;
                         image.Name = fileName;
                         image.ServerFolderId = serverFolderId;
                         image.PublicationDate = DateTime.Now;
->>>>>>> hotfix
                         _entities.Images.Add(image);
                         _entities.SaveChanges();
-
-                        transaction.Commit();
-
                         var bitmap = new Bitmap(file.InputStream);
                         var path = Path.Combine(Server.MapPath("~/img/"), image.ServerFolder.SharedCode + "/"+ sharedCode + ".png");
                         bitmap.Save(path, ImageFormat.Png);
                         var compressedBitmap = _imageCompressor.Compress(bitmap, new Size(128, 128));
                         path = Path.Combine(Server.MapPath("~/img/"), image.ServerFolder.SharedCode + "/"+ sharedCode + "_compressed.png");
                         compressedBitmap.Save(path, ImageFormat.Png);
+                        transaction.Commit();
                     }
                     catch (Exception ex)
                     {
@@ -135,7 +117,7 @@ namespace ScreenTaker.Controllers
                         ViewBag.MessageContent= ex.Message;
                         ViewBag.MessageTitle = Resources.Resource.ERR_TITLE;
                         ViewBag.Localize = getLocale();
-                        return RedirectToAction("Message", "Home", new { lang = getLocale() });
+                        return View("Welcome", new { lang = getLocale() });
                     }
                 }
             }
@@ -261,8 +243,8 @@ namespace ScreenTaker.Controllers
                         throw new Exception(Resources.Resource.ERR_EMPTY_FIELD);
                     if (!IsValidEmail(email))
                         throw new Exception(Resources.Resource.ERR_EMAIL_NOT_VALID);                    
-                    var personID = _entities.People.Where(w => w.Email == email).Select(s => s.Id).FirstOrDefault();
-                    if (_entities.UserShares.Any(w => (w.Email == email || w.PersonId==personID)&&w.FolderId==folderId))
+                    var personId = _entities.People.Where(w => w.Email == email).Select(s => s.Id).FirstOrDefault();
+                    if (_entities.UserShares.Any(w => (w.Email == email || w.PersonId==personId)&&w.FolderId==folderId))
                         throw new Exception(Resources.Resource.ERR_USER_ALREDY);
 
                     ApplicationUserManager userManager =
@@ -278,9 +260,9 @@ namespace ScreenTaker.Controllers
                         var personFriend = new PersonFriend() { PersonId = user.Id, FriendId = friend.Id };
                         _entities.PersonFriends.Add(personFriend);
                     }
-                    if (personID != 0)
+                    if (personId != 0)
                     {
-                        UserShare us = new UserShare { PersonId = personID, FolderId = folderId };
+                        UserShare us = new UserShare { PersonId = personId, FolderId = folderId };
                         _entities.UserShares.Add(us);
                     }
                     else
@@ -445,13 +427,13 @@ namespace ScreenTaker.Controllers
             using (var transaction = _entities.Database.BeginTransaction())
             {
                 try
-                {                    
+                {
                     if (email.Length == 0)
                         throw new Exception(Resources.Resource.ERR_EMPTY_FIELD);
                     if (!IsValidEmail(email))
                         throw new Exception(Resources.Resource.ERR_EMAIL_NOT_VALID);                    
                     var person = _entities.People.FirstOrDefault(w => w.Email == email);
-                    if (_entities.UserShares.Any(w => (w.Email == email || w.PersonId == person.Id) && w.ImageId == imageId))
+                    if (person!=null && _entities.UserShares.Any(w => (w.Email == email || w.PersonId == person.Id) && w.ImageId == imageId))
                         throw new Exception(Resources.Resource.ERR_USER_ALREDY);
                     var image = _entities.Images.FirstOrDefault(w => w.Id == imageId);
 
@@ -468,7 +450,7 @@ namespace ScreenTaker.Controllers
                         var personFriend = new PersonFriend() { PersonId = user.Id, FriendId = friend.Id };
                         _entities.PersonFriends.Add(personFriend);
                     }
-                    if (person != null)
+                    if (person != null && person.Id != 0)
                     {
                         UserShare us = new UserShare { PersonId = person.Id, ImageId = imageId };
                         _entities.UserShares.Add(us);
@@ -495,6 +477,7 @@ namespace ScreenTaker.Controllers
                     transaction.Rollback();
                     TempData["MessageContent"] = ex.Message;
                 }
+
             }
             return RedirectToAction("PartialImagesAccess", new { imageId = imageId });
         }
@@ -614,10 +597,6 @@ namespace ScreenTaker.Controllers
         {
             ViewBag.Localize = getLocale();
             ViewBag.Message = "Library page";
-<<<<<<< HEAD
-            ViewBag.Folders = _entities.Folders.ToList();
-            ViewBag.FolderLink = GetBaseUrl() + _entities.Folders.ToList().ElementAt(0).sharedCode;
-=======
             ViewBag.FolderLinkBASE = GetSharedFolderLink("");
             ViewBag.UserAvatarBASE = getUserAvatarBASE();
             ViewBag.SharedImageBASE = GetSharedImageLink("");
@@ -662,7 +641,6 @@ namespace ScreenTaker.Controllers
             ViewBag.BASE_URL = GetBaseUrl() + "";
             ViewBag.FolderLinkBASE =  GetSharedFolderLink("");
 
->>>>>>> hotfix
             return View();
         }
         
@@ -670,18 +648,6 @@ namespace ScreenTaker.Controllers
         public ActionResult ChangeFoldersAttr(Folder folder, string lang = "en")
         {
             ViewBag.Folders = _entities.Folders.ToList();
-<<<<<<< HEAD
-
-            return RedirectToAction("Library");
-        }
-        #endregion
-
-        public ActionResult Images()
-        {
-            var list = _entities.Images.ToList();
-            ViewBag.Images = list;
-            var pathsList = _entities.Images.ToList().Select(i => GetBaseUrl() + "img/" + i.sharedCode ).ToList();
-=======
             ViewBag.Localize = getLocale();
             return RedirectToAction("Library");
         }
@@ -697,7 +663,6 @@ namespace ScreenTaker.Controllers
             ViewBag.IsEmpty = !list.Any();
             ViewBag.Images = list;
             var pathsList = _entities.Images.ToList().Select(i => GetImagePath(i.SharedCode)).ToList();
->>>>>>> hotfix
             ViewBag.Paths = pathsList;
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext()
                 .GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
@@ -913,12 +878,6 @@ namespace ScreenTaker.Controllers
         [AllowAnonymous]
         public ActionResult SharedFolder(string f, string lang = "en")
         {
-<<<<<<< HEAD
-            ViewBag.Image =  _entities.Images.Where(im=>im.sharedCode.Equals(image)).FirstOrDefault();
-            if(ViewBag.Image==null && _entities.Images.ToList().Count>0)
-            {
-                ViewBag.Image = _entities.Images.ToList().First();
-=======
             ViewBag.Localize = getLocale();
             try
             {
@@ -986,7 +945,6 @@ namespace ScreenTaker.Controllers
                     return View("SharedFolder", new { lang = getLocale() });
                 }
                 return View("Message", new { lang = getLocale() });
->>>>>>> hotfix
             }
             catch
             {
@@ -1264,12 +1222,8 @@ namespace ScreenTaker.Controllers
             using (var transaction = _entities.Database.BeginTransaction())
             {
                 try
-                {
-                    if (title.Length == 0)
-                        throw new Exception(Resources.Resource.ERR_EMPTY_FIELD);
+                {                   
                     ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId<int>());
-                    if (user != null && _entities.Folders.Where(w => w.Name == title && w.OwnerId == user.Id).Any())
-                        throw new Exception(Resources.Resource.ERR_FOLDER_ALREDY);                    
                     var newolder = new Folder()
                     {
                         IsPublic = false,
@@ -1279,8 +1233,7 @@ namespace ScreenTaker.Controllers
                         CreationDate = DateTime.Now
                     };
                     _entities.Folders.Add(newolder);
-                    _entities.SaveChanges();
-                    transaction.Commit();
+                                    
                     var folders = _entities.Folders.ToList().Where(f => f.OwnerId == user.Id).ToList();
                     ViewBag.Folders = folders;
                     ViewBag.BASE_URL = GetBaseUrl() + "";
@@ -1289,11 +1242,17 @@ namespace ScreenTaker.Controllers
                     var sharedLinks = folders.ToList().Select(f => GetSharedFolderLink(f.SharedCode)).ToList();
                     ViewBag.Count = folders.Count;
                     ViewBag.SharedLinks = sharedLinks;
+                    if (title.Length == 0)
+                        throw new Exception(Resources.Resource.ERR_EMPTY_FIELD);
+                    if (user != null && _entities.Folders.Where(w => w.Name == title && w.OwnerId == user.Id).Any())
+                        throw new Exception(Resources.Resource.ERR_FOLDER_ALREDY);
+                    _entities.SaveChanges();
+                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();                    
-                    TempData["MessageContent"] = ex.Message;
+                    ViewBag.MessageContent = ex.Message;
                 }
             }
             return PartialView("PartialFoldersChangeState");

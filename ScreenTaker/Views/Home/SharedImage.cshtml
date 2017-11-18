@@ -1,7 +1,4 @@
 ﻿@{
-<<<<<<< HEAD
-    ViewBag.Title = "SharedImage";
-=======
     ViewBag.Title = ViewBag.OriginalName;
     if (!Request.QueryString["lang"].IsEmpty())
     {
@@ -18,26 +15,10 @@
     <script>
         $('[data-toggle="popover"]').popover()
     </script>
->>>>>>> hotfix
 }
 
 @if (ViewBag.AccessGranted)
 {
-<<<<<<< HEAD
-    <br/>
-    <div class="col-md-12 text-center">
-        <img src="@ViewBag.ImagePath"/>
-        <h2>@ViewBag.ImageName</h2>
-    </div>
-}
-else
-{
-    <br/>
-    <div class="col-md-12 text-left">
-        <h2>Access denied</h2>
-        <p>Image owner has restricted access to this image</p>
-    </div>
-=======
     string temp = ((ViewBag.Owner != null && ViewBag.Owner.AvatarFile != null && System.IO.File.Exists(Server.MapPath("/avatars/") + ViewBag.Owner.AvatarFile + "_50.png")) ? (ViewBag.Owner.AvatarFile) : "user");
     string AvatarPath = ViewBag.UserAvatarBASE + temp + "_50.png";
     string OwnerEmail = ViewBag.Owner.Email;
@@ -76,5 +57,4 @@ else
                 </div>
             </div>
         </div>
->>>>>>> hotfix
 }

@@ -48,17 +48,11 @@ namespace ScreenTaker.Models
         int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext()
-<<<<<<< HEAD
-            : base("IdentityConnection", throwIfV1Schema: false)
-        { }
-        
-=======
             : base("IdentityConnection")
         {
             System.Data.Entity.Database.SetInitializer<ApplicationDbContext>(null);
         }
 
->>>>>>> hotfix
         public static ApplicationDbContext Create()
         {
 

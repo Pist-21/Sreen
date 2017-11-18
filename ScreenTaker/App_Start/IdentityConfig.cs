@@ -97,11 +97,7 @@ namespace ScreenTaker
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-<<<<<<< HEAD
-                RequiredLength = 4,
-=======
                 RequiredLength = 6,
->>>>>>> hotfix
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,

@@ -96,23 +96,6 @@
 </script>
 }
 
-<<<<<<< HEAD
-<div class="row" style="margin-bottom: -20px; overflow: hidden; position: relative; min-height: 600px">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 text-left" style="margin-top: 20px;">
-        <div class="row">
-            <ul class="vert_menu">
-                <li><a href="/Home/Library" class="current">User</a></li>
-                <li><a href="/Home/Images" class="current">Shared folder</a></li>
-                <li><a href="#" class="current">@ViewBag.OriginalName</a></li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="row text-center">
-                    <img src="@ViewBag.OriginalPath" style="width: 800px; height: 450px"/>
-=======
 <div class="modal fade" id="RenameImage" tabindex="-1" role="dialog" style="top:200px">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -176,7 +159,6 @@
                     <div class="row">
                         <p class="control-label">@Resources.Resource.WANT_DELETE <b id="ImageNameDelete">@ViewBag.ImageTitle</b> @Resources.Resource.IMAGEY?</p>
                     </div>
->>>>>>> hotfix
                 </div>
             </div>
             <div class="modal-footer">
@@ -238,25 +220,6 @@
                         </div>
                         </div>
                         <div class="row">
-<<<<<<< HEAD
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">map</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">favorite</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">earth</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">mine</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">family</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-warning" style="width: 100%; background-color: #686868; color: white">nature</button>
-=======
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="newFolderName" placeholder="Enter new folder's title" value="@Resources.Resource.NEW_FOLDER">
@@ -279,10 +242,8 @@
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </span>                                
->>>>>>> hotfix
                             </div>
                         </div>
-                        <br/>
                     </div>
                 </form>
             </div>
@@ -302,14 +263,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    <div class="col-md-2" style="background-color: #686868; right: 10px; height: 100%; position: absolute">
-        <div style="margin-left: 10px">
-                <p style="color: #E0E0E0; padding-top: 10px">Name</p>
-                <hr/>
-                <div>
-                    <button type="button" class="btn btn-default" style="width: 100%">Rename</button>
-=======
 <div class="row main" id="main" style="margin-bottom: -20px; overflow: hidden; position: relative; min-height: 100%">
         <div class="col-md-12 " id="dynamicSingleImageArea">
                 <div class="row" id="titleRow">
@@ -413,7 +366,7 @@
                 </div>
                 <hr />
                 <p style="color: #E0E0E0">@Resources.Resource.SHARE_LINK</p>
-                <input class="form-control btn-not-rounded" style="width: 100%" id="sharedLink" type="text" placeholder="Sharing link" onclick="document.getElementById('sharedLink').select(); copyToClipboard(document.getElementById('sharedLink')); this.select();" value="@ViewBag.SharedLink" readonly/>
+                <input class="form-control btn-not-rounded" style="width: 100%" id="sharedLink" type="text" placeholder="Sharing link" onclick="selectText();" value="@ViewBag.SharedLink" readonly/>
                 <br />
                 <div>
                     <button type="button" class="btn btn-success btn-not-rounded" data-toggle="modal" data-target="#SingleImageManageAccess" style="width: 100%" 
@@ -428,20 +381,8 @@
                             }
                             }); 
                         ">@Resources.Resource.MANAGE_ACCESS</button>
->>>>>>> hotfix
                 </div>
-                <br/>
-                <div>
-                    <button type="button" class="btn btn-danger" style="width: 100%">Delete</button>
-                </div>
-                <br/>
-                <div>
-                    <button class="btn btn-warning" style="width: 100%">Make public</button>
-                </div>
-                <hr/>
-                <p style="color: #E0E0E0">Share image</p>
-                <input class="form-control" style="width: 100%" type="text" placeholder="Sharing link" value="SharedLink"/>
-            <hr/>
+            </div>
         </div>
 
     </div>
